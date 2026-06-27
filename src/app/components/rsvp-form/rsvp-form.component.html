@@ -1,0 +1,201 @@
+<section id="rsvp" class="section-padding bg-gradient-to-b from-blush-100/40 to-cream-100">
+  <div class="mx-auto max-w-3xl text-center">
+    <h2 appReveal class="section-heading">{{ wedding.rsvp.sectionTitle }}</h2>
+    <p appReveal [revealDelay]="100" class="section-subheading mx-auto">
+      {{ wedding.rsvp.sectionSubtitle }}
+    </p>
+  </div>
+
+  <div class="mx-auto mt-14 max-w-xl">
+    @if (isSubmitted()) {
+      <!-- Thank you confirmation -->
+      <div
+        appReveal
+        class="card animate-scale-in py-16 text-center"
+      >
+        <div
+          class="mx-auto mb-6 flex h-16 w-16 items-center justify-center rounded-full bg-sage-500/10"
+        >
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            class="h-8 w-8 text-sage-600"
+            fill="none"
+            viewBox="0 0 24 24"
+            stroke="currentColor"
+          >
+            <path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              stroke-width="1.5"
+              d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"
+            />
+          </svg>
+        </div>
+        <h3 class="font-serif text-3xl font-medium text-charcoal">
+          {{ wedding.rsvp.thankYouTitle }}
+        </h3>
+        <p class="mt-4 text-base leading-relaxed text-charcoal-light">
+          {{ thankYouMessage }}
+        </p>
+      </div>
+    } @else {
+      <!-- RSVP Form -->
+      <form
+        appReveal
+        [formGroup]="rsvpForm"
+        (ngSubmit)="onSubmit()"
+        class="card space-y-8"
+        novalidate
+      >
+        <!-- Guest Name -->
+        <div>
+          <label
+            for="guestName"
+            class="mb-2 block text-xs font-medium tracking-widest uppercase text-sage-600"
+          >
+            {{ wedding.rsvp.nameLabel }}
+          </label>
+          <input
+            id="guestName"
+            type="text"
+            formControlName="guestName"
+            [placeholder]="wedding.rsvp.namePlaceholder"
+            class="w-full rounded-xl border border-cream-200 bg-cream-50/50 px-4 py-3 text-charcoal transition-colors placeholder:text-charcoal-light/40 focus:border-sage-400 focus:outline-none focus:ring-2 focus:ring-sage-400/20"
+            [class.border-red-300]="fieldError('guestName')"
+          />
+          @if (fieldError('guestName')) {
+            <p class="mt-1 text-xs text-red-500">{{ fieldError('guestName') }}</p>
+          }
+        </div>
+
+        <!-- Attendance -->
+        <fieldset>
+          <legend
+            class="mb-3 block text-xs font-medium tracking-widest uppercase text-sage-600"
+          >
+            {{ wedding.rsvp.attendanceLabel }}
+          </legend>
+          <div class="grid grid-cols-2 gap-3">
+            <button
+              type="button"
+              class="rounded-xl border-2 px-4 py-4 text-sm font-medium transition-all duration-300"
+              [class.border-sage-600]="isAttending"
+              [class.bg-sage-600]="isAttending"
+              [class.text-cream-50]="isAttending"
+              [class.border-cream-200]="!isAttending"
+              [class.bg-white]="!isAttending"
+              [class.text-charcoal-light]="!isAttending"
+              [class.hover:border-sage-400]="!isAttending"
+              (click)="selectAttendance('attending')"
+            >
+              {{ wedding.rsvp.attending }}
+            </button>
+            <button
+              type="button"
+              class="rounded-xl border-2 px-4 py-4 text-sm font-medium transition-all duration-300"
+              [class.border-sage-600]="!isAttending"
+              [class.bg-sage-600]="!isAttending"
+              [class.text-cream-50]="!isAttending"
+              [class.border-cream-200]="isAttending"
+              [class.bg-white]="isAttending"
+              [class.text-charcoal-light]="isAttending"
+              [class.hover:border-sage-400]="isAttending"
+              (click)="selectAttendance('declining')"
+            >
+              {{ wedding.rsvp.declining }}
+            </button>
+          </div>
+        </fieldset>
+
+        <!-- Plus Ones (conditional) -->
+        @if (isAttending) {
+          <div class="animate-fade-in-up">
+            <label
+              for="plusOnes"
+              class="mb-2 block text-xs font-medium tracking-widest uppercase text-sage-600"
+            >
+              {{ wedding.rsvp.plusOnesLabel }}
+            </label>
+            <p class="mb-3 text-xs text-charcoal-light">
+              {{ wedding.rsvp.plusOnesHint }}
+            </p>
+            <div class="flex items-center gap-4">
+              <button
+                type="button"
+                class="flex h-10 w-10 items-center justify-center rounded-full border border-cream-200 text-charcoal transition-colors hover:border-sage-400 hover:bg-sage-500/10"
+                (click)="decrementPlusOnes()"
+                aria-label="Decrease guests"
+              >
+                −
+              </button>
+              <span class="font-serif text-2xl text-charcoal">{{
+                rsvpForm.value.plusOnes
+              }}</span>
+              <button
+                type="button"
+                class="flex h-10 w-10 items-center justify-center rounded-full border border-cream-200 text-charcoal transition-colors hover:border-sage-400 hover:bg-sage-500/10"
+                (click)="incrementPlusOnes()"
+                aria-label="Increase guests"
+              >
+                +
+              </button>
+            </div>
+          </div>
+        }
+
+        <!-- Dietary Restrictions -->
+        <div>
+          <label
+            for="dietary"
+            class="mb-2 block text-xs font-medium tracking-widest uppercase text-sage-600"
+          >
+            {{ wedding.rsvp.dietaryLabel }}
+          </label>
+          <input
+            id="dietary"
+            type="text"
+            formControlName="dietaryRestrictions"
+            [placeholder]="wedding.rsvp.dietaryPlaceholder"
+            class="w-full rounded-xl border border-cream-200 bg-cream-50/50 px-4 py-3 text-charcoal transition-colors placeholder:text-charcoal-light/40 focus:border-sage-400 focus:outline-none focus:ring-2 focus:ring-sage-400/20"
+          />
+        </div>
+
+        <!-- Message -->
+        <div>
+          <label
+            for="message"
+            class="mb-2 block text-xs font-medium tracking-widest uppercase text-sage-600"
+          >
+            {{ wedding.rsvp.messageLabel }}
+          </label>
+          <textarea
+            id="message"
+            formControlName="message"
+            rows="4"
+            [placeholder]="wedding.rsvp.messagePlaceholder"
+            class="w-full resize-none rounded-xl border border-cream-200 bg-cream-50/50 px-4 py-3 text-charcoal transition-colors placeholder:text-charcoal-light/40 focus:border-sage-400 focus:outline-none focus:ring-2 focus:ring-sage-400/20"
+          ></textarea>
+          @if (fieldError('message')) {
+            <p class="mt-1 text-xs text-red-500">{{ fieldError('message') }}</p>
+          }
+        </div>
+
+        @if (submitError()) {
+          <p class="text-center text-sm text-red-500">{{ submitError() }}</p>
+        }
+
+        <button
+          type="submit"
+          class="btn-primary w-full"
+          [disabled]="isSubmitting()"
+        >
+          {{
+            isSubmitting()
+              ? wedding.rsvp.submittingButton
+              : wedding.rsvp.submitButton
+          }}
+        </button>
+      </form>
+    }
+  </div>
+</section>

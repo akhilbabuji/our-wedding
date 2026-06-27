@@ -1,0 +1,98 @@
+@if (isOpen() && currentImage) {
+  <div
+    class="fixed inset-0 z-50 flex items-center justify-center bg-charcoal/90 backdrop-blur-sm animate-fade-in"
+    role="dialog"
+    aria-modal="true"
+    aria-label="Image gallery lightbox"
+    (click)="close()"
+  >
+    <!-- Close button -->
+    <button
+      type="button"
+      class="absolute top-5 right-5 z-10 rounded-full p-2 text-cream-50 transition-colors hover:bg-white/10"
+      aria-label="Close lightbox"
+      (click)="close(); $event.stopPropagation()"
+    >
+      <svg
+        xmlns="http://www.w3.org/2000/svg"
+        class="h-8 w-8"
+        fill="none"
+        viewBox="0 0 24 24"
+        stroke="currentColor"
+      >
+        <path
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          stroke-width="1.5"
+          d="M6 18L18 6M6 6l12 12"
+        />
+      </svg>
+    </button>
+
+    <!-- Previous -->
+    <button
+      type="button"
+      class="absolute left-4 z-10 rounded-full p-3 text-cream-50 transition-colors hover:bg-white/10 md:left-8"
+      aria-label="Previous image"
+      (click)="prev(); $event.stopPropagation()"
+    >
+      <svg
+        xmlns="http://www.w3.org/2000/svg"
+        class="h-8 w-8"
+        fill="none"
+        viewBox="0 0 24 24"
+        stroke="currentColor"
+      >
+        <path
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          stroke-width="1.5"
+          d="M15 19l-7-7 7-7"
+        />
+      </svg>
+    </button>
+
+    <!-- Image -->
+    <div
+      class="mx-16 max-h-[85vh] max-w-5xl animate-scale-in"
+      (click)="$event.stopPropagation()"
+    >
+      <img
+        [src]="currentImage.src"
+        [alt]="currentImage.alt"
+        class="max-h-[80vh] w-full rounded-lg object-contain shadow-2xl"
+      />
+      @if (currentImage.caption) {
+        <p class="mt-4 text-center text-sm tracking-wide text-cream-200">
+          {{ currentImage.caption }}
+        </p>
+      }
+      <p class="mt-2 text-center text-xs text-cream-50/50">
+        {{ currentIndex() + 1 }} / {{ images.length }}
+      </p>
+    </div>
+
+    <!-- Next -->
+    <button
+      type="button"
+      class="absolute right-4 z-10 rounded-full p-3 text-cream-50 transition-colors hover:bg-white/10 md:right-8"
+      aria-label="Next image"
+      (click)="next(); $event.stopPropagation()"
+    >
+      <svg
+        xmlns="http://www.w3.org/2000/svg"
+        class="h-8 w-8"
+        fill="none"
+        viewBox="0 0 24 24"
+        stroke="currentColor"
+      >
+        <path
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          stroke-width="1.5"
+          d="M9 5l7 7-7 7"
+        />
+      </svg>
+    </button>
+  </div>
+}

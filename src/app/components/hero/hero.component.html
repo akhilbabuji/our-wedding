@@ -1,0 +1,120 @@
+<section
+  class="relative flex min-h-screen flex-col items-center justify-center overflow-hidden bg-gradient-to-b from-cream-100 via-blush-100/40 to-cream-50 px-5 pt-24 pb-16 text-center"
+>
+  <!-- Decorative elements -->
+  <div
+    class="pointer-events-none absolute inset-0 opacity-30"
+    aria-hidden="true"
+  >
+    <div
+      class="absolute -top-32 -right-32 h-96 w-96 rounded-full bg-blush-200/50 blur-3xl"
+    ></div>
+    <div
+      class="absolute -bottom-32 -left-32 h-96 w-96 rounded-full bg-sage-400/20 blur-3xl"
+    ></div>
+  </div>
+
+  <div class="relative z-10 mx-auto max-w-4xl">
+    <!-- Personalized / generic welcome -->
+    <p
+      appReveal
+      class="mx-auto mb-8 max-w-2xl text-sm font-medium tracking-[0.25em] uppercase text-sage-600 md:text-base"
+    >
+      @if (guest) {
+        <span class="block text-blush-400">✦</span>
+      }
+      Save the Date
+    </p>
+
+    <p
+      appReveal
+      [revealDelay]="100"
+      class="mx-auto mb-10 max-w-2xl font-serif text-xl leading-relaxed text-charcoal-light italic md:text-2xl lg:text-3xl"
+      [class.text-charcoal]="guest"
+    >
+      {{ welcomeMessage }}
+    </p>
+
+    <!-- Couple names -->
+    <h1
+      appReveal
+      [revealDelay]="200"
+      class="font-serif text-6xl font-medium tracking-wide text-charcoal md:text-7xl lg:text-8xl"
+    >
+      {{ wedding.couple.partnerOne }}
+      <span class="mx-3 text-blush-400 font-light italic">&</span>
+      {{ wedding.couple.partnerTwo }}
+    </h1>
+
+    <p
+      appReveal
+      [revealDelay]="300"
+      class="mt-6 font-serif text-lg text-sage-500 italic md:text-xl"
+    >
+      {{ wedding.hero.tagline }}
+    </p>
+
+    <!-- Date & location -->
+    <div appReveal [revealDelay]="400" class="mt-10 space-y-2">
+      <p class="text-sm font-medium tracking-[0.2em] uppercase text-charcoal-light">
+        {{ wedding.weddingDate.display }}
+      </p>
+      <p class="text-sm tracking-widest uppercase text-sage-600">
+        {{ wedding.location.venue }} · {{ wedding.location.city }},
+        {{ wedding.location.country }}
+      </p>
+    </div>
+
+    <!-- Countdown -->
+    <div
+      appReveal
+      [revealDelay]="500"
+      class="mx-auto mt-14 grid max-w-lg grid-cols-4 gap-3 md:gap-6"
+    >
+      @for (unit of countdown(); track unit.label) {
+        <div
+          class="rounded-xl border border-cream-200 bg-white/60 px-2 py-4 backdrop-blur-sm md:px-4 md:py-6"
+        >
+          <span
+            class="block font-serif text-2xl font-medium text-charcoal md:text-4xl"
+          >
+            {{ unit.value | number: '2.0-0' }}
+          </span>
+          <span
+            class="mt-1 block text-[10px] font-medium tracking-[0.15em] uppercase text-sage-500 md:text-xs"
+          >
+            {{ unit.label }}
+          </span>
+        </div>
+      }
+    </div>
+
+    <!-- CTA -->
+    <div appReveal [revealDelay]="600" class="mt-14">
+      <button type="button" class="btn-primary" (click)="scrollToRsvp()">
+        RSVP Now
+      </button>
+    </div>
+  </div>
+
+  <!-- Scroll indicator -->
+  <div
+    class="absolute bottom-8 left-1/2 -translate-x-1/2 animate-bounce text-sage-400"
+    aria-hidden="true"
+  >
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      class="h-6 w-6"
+      fill="none"
+      viewBox="0 0 24 24"
+      stroke="currentColor"
+    >
+      <path
+        stroke-linecap="round"
+        stroke-linejoin="round"
+        stroke-width="1.5"
+        d="M19 9l-7 7-7-7"
+      />
+    </svg>
+  </div>
+</section>

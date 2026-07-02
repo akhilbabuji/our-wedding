@@ -2,21 +2,21 @@ import { WeddingData } from '../models/wedding.model';
 
 export const WEDDING_DATA: WeddingData = {
   couple: {
-    partnerOne: 'Olivia',
-    partnerTwo: 'James',
-    displayNames: 'Olivia & James',
+    partnerOne: 'Anusree',
+    partnerTwo: 'Akhil',
+    displayNames: 'Anusree & Akhil',
   },
 
   weddingDate: {
-    iso: '2026-09-12T16:00:00',
-    display: 'Saturday, September 12, 2026',
-    time: '4:00 PM',
+    iso: '2026-08-23T16:00:00',
+    display: 'Sunday, August 23, 2026',
+    time: '12:00 PM',
   },
 
   location: {
-    city: 'Napa Valley',
-    venue: 'Willow Creek Estate',
-    country: 'California',
+    city: 'Chottanikkara, Ernakulam, Kerala',
+    venue: 'Souparnika Auditorium',
+    country: 'India',
   },
 
   hero: {
@@ -77,39 +77,28 @@ export const WEDDING_DATA: WeddingData = {
       'We cannot wait to celebrate with you. Here is everything you need to know for the day.',
     schedule: [
       {
-        id: 'ceremony',
-        title: 'Ceremony',
-        date: 'Saturday, September 12, 2026',
-        time: '4:00 PM',
-        venue: 'Willow Creek Estate — Garden Pavilion',
-        address: '2450 Silverado Trail, Napa, CA 94558',
+        id: 'wedding-ceremony',
+        title: 'Wedding Ceremony',
+        date: 'Sunday, August 23, 2026',
+        time: '12:00 PM',
+        venue: 'Souparnika Auditorium',
+        address: 'Chottanikkara, Ernakulam, Kerala',
         description:
-          'An intimate outdoor ceremony surrounded by olive trees and rolling vineyards. Please arrive 15 minutes early.',
-        mapsUrl: 'https://maps.google.com/?q=2450+Silverado+Trail+Napa+CA',
-        dressCode: 'Garden Formal',
+          'A beautiful wedding ceremony with all the traditional Kerala customs. Please arrive 15 minutes early.',
+        mapsUrl: 'https://maps.app.goo.gl/ToovBXFioaQBUMDx9',
+        dressCode: 'Traditional Kerala Attire',
       },
       {
         id: 'reception',
         title: 'Reception',
-        date: 'Saturday, September 12, 2026',
+        date: 'Sunday, August 23, 2026',
         time: '6:00 PM',
-        venue: 'Willow Creek Estate — Grand Terrace',
-        address: '2450 Silverado Trail, Napa, CA 94558',
+        venue: 'Ranganath Auditorium',
+        address: 'Vazhikulangara, North Paravur, Ernakulam, Kerala',
         description:
-          'Dinner, dancing, and celebration under the stars. The party continues until midnight.',
-        mapsUrl: 'https://maps.google.com/?q=2450+Silverado+Trail+Napa+CA',
+          'A beautiful receptionr.',
+        mapsUrl: 'https://maps.app.goo.gl/ZEb1VHRgrZn58Dq16',
         dressCode: 'Garden Formal',
-      },
-      {
-        id: 'brunch',
-        title: 'Farewell Brunch',
-        date: 'Sunday, September 13, 2026',
-        time: '10:00 AM',
-        venue: 'Willow Creek Estate — Courtyard',
-        address: '2450 Silverado Trail, Napa, CA 94558',
-        description:
-          'A relaxed morning gathering for those staying in the area. Light bites and coffee served.',
-        mapsUrl: 'https://maps.google.com/?q=2450+Silverado+Trail+Napa+CA',
       },
     ],
   },
@@ -120,39 +109,28 @@ export const WEDDING_DATA: WeddingData = {
     images: [
       {
         id: 'g1',
-        src: 'https://images.unsplash.com/photo-1519741497674-611481863552?w=800&q=80',
-        alt: 'Couple walking through a vineyard at sunset',
-        caption: 'Tuscany, December 2025',
+        src: 'gallery/engagement-1.png',
+        alt: 'Couple sharing a quiet moment together',
       },
       {
         id: 'g2',
-        src: 'https://images.unsplash.com/photo-1522673607210-8a2aa9a8a659?w=800&q=80',
-        alt: 'Engagement ring held between two hands',
-        caption: 'The moment she said yes',
+        src: 'gallery/engagement-2.png',
+        alt: 'Couples looking at each other',
       },
       {
         id: 'g3',
-        src: 'https://images.unsplash.com/photo-1465497424744-6f3389a4a8ad?w=800&q=80',
-        alt: 'Couple laughing together outdoors',
-        caption: 'Golden Gate Park, 2019',
+        src: 'gallery/engagement-3.png',
+        alt: 'Close up of couple with engagement rings',
       },
       {
         id: 'g4',
-        src: 'https://images.unsplash.com/photo-1511285560929-80b456fea0bc?w=800&q=80',
-        alt: 'Wedding celebration with flowers',
-        caption: 'Dreaming of our day',
+        src: 'gallery/engagement-4.png',
+        alt: 'Wedding rings in a decorative wooden box with rose petals',
       },
       {
         id: 'g5',
-        src: 'https://images.unsplash.com/photo-1606800052052-a08af7148866?w=800&q=80',
-        alt: 'Couple toasting with champagne',
-        caption: 'Cheers to us',
-      },
-      {
-        id: 'g6',
-        src: 'https://images.unsplash.com/photo-1529636798458-92182ee66240?w=800&q=80',
-        alt: 'Couple dancing in soft light',
-        caption: 'Our first dance practice',
+        src: 'gallery/engagement-5.png',
+        alt: 'Couple holding hands showing engagement rings and bangles',
       },
     ],
   },
@@ -160,7 +138,7 @@ export const WEDDING_DATA: WeddingData = {
   rsvp: {
     sectionTitle: 'RSVP',
     sectionSubtitle:
-      'Please let us know if you can join us by August 15, 2026. We hope to see you there!',
+      'Please let us know if you can join us by August 23, 2026. We hope to see you there!',
     nameLabel: 'Your Name',
     namePlaceholder: 'Full name or family name',
     attendanceLabel: 'Will you be attending?',
@@ -184,6 +162,6 @@ export const WEDDING_DATA: WeddingData = {
 
   footer: {
     message: 'With love and gratitude',
-    hashtag: '#OliviaAndJames2026',
+    hashtag: '#AnusreeeAndAkhil2026',
   },
 };

@@ -1,11 +1,11 @@
-<app-site-nav />
+<app-splash-screen />
+<!-- <app-site-nav /> -->
 
 <main>
   <app-hero [guest]="guest()" />
-  <app-timeline />
-  <app-event-details />
+  <app-event-details [eventFilter]="eventFilter()" />
   <app-gallery />
-  <app-rsvp-form [guest]="guest()" />
+  <app-rsvp-form [guest]="guest()" [invitedTo]="eventFilter()" />
 </main>
 
 <app-site-footer />

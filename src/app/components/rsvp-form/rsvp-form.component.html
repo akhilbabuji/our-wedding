@@ -1,27 +1,27 @@
-<section id="rsvp" class="section-padding bg-gradient-to-b from-blush-100/40 to-cream-100">
-  <div class="mx-auto max-w-3xl text-center">
+<section id="rsvp" class="section-padding bg-gradient-to-b from-blush-100/50 via-cream-100 to-sage-50/30">
+  <div class="section-header">
     <h2 appReveal class="section-heading">{{ wedding.rsvp.sectionTitle }}</h2>
-    <p appReveal [revealDelay]="100" class="section-subheading mx-auto">
+    <div appReveal [revealDelay]="50" class="section-accent"></div>
+    <p appReveal [revealDelay]="100" class="section-subheading">
       {{ wedding.rsvp.sectionSubtitle }}
     </p>
   </div>
 
-  <div class="mx-auto mt-14 max-w-xl">
+  <div class="mx-auto mt-14 w-full max-w-xl px-1">
     @if (isSubmitted()) {
-      <!-- Thank you confirmation -->
-      <div
-        appReveal
-        class="card animate-scale-in py-16 text-center"
-      >
+      <div appReveal class="card animate-scale-in border-blush-200 py-14 text-center sm:py-16">
         <div
-          class="mx-auto mb-6 flex h-16 w-16 items-center justify-center rounded-full bg-sage-500/10"
+          class="mx-auto mb-6 flex h-14 w-14 items-center justify-center rounded-full bg-blush-100"
         >
           <svg
             xmlns="http://www.w3.org/2000/svg"
-            class="h-8 w-8 text-sage-600"
+            class="icon-md text-blush-500"
             fill="none"
             viewBox="0 0 24 24"
             stroke="currentColor"
+            width="20"
+            height="20"
+            aria-hidden="true"
           >
             <path
               stroke-linecap="round"
@@ -39,15 +39,15 @@
         </p>
       </div>
     } @else {
-      <!-- RSVP Form -->
       <form
         appReveal
+        revealFrom="bottom"
+        [revealDelay]="150"
         [formGroup]="rsvpForm"
         (ngSubmit)="onSubmit()"
-        class="card space-y-8"
+        class="card space-y-6 border-blush-200/80 sm:space-y-8"
         novalidate
       >
-        <!-- Guest Name -->
         <div>
           <label
             for="guestName"
@@ -60,7 +60,7 @@
             type="text"
             formControlName="guestName"
             [placeholder]="wedding.rsvp.namePlaceholder"
-            class="w-full rounded-xl border border-cream-200 bg-cream-50/50 px-4 py-3 text-charcoal transition-colors placeholder:text-charcoal-light/40 focus:border-sage-400 focus:outline-none focus:ring-2 focus:ring-sage-400/20"
+            class="w-full rounded-xl border border-cream-200 bg-cream-50/80 px-4 py-3 text-charcoal transition-colors placeholder:text-charcoal-light/40 focus:border-blush-300 focus:outline-none focus:ring-2 focus:ring-blush-200"
             [class.border-red-300]="fieldError('guestName')"
           />
           @if (fieldError('guestName')) {
@@ -68,7 +68,6 @@
           }
         </div>
 
-        <!-- Attendance -->
         <fieldset>
           <legend
             class="mb-3 block text-xs font-medium tracking-widest uppercase text-sage-600"
@@ -78,28 +77,30 @@
           <div class="grid grid-cols-2 gap-3">
             <button
               type="button"
-              class="rounded-xl border-2 px-4 py-4 text-sm font-medium transition-all duration-300"
+              class="rounded-xl border-2 px-3 py-3.5 text-sm font-medium transition-all duration-300 sm:px-4 sm:py-4"
               [class.border-sage-600]="isAttending"
               [class.bg-sage-600]="isAttending"
               [class.text-cream-50]="isAttending"
+              [class.shadow-sm]="isAttending"
               [class.border-cream-200]="!isAttending"
               [class.bg-white]="!isAttending"
               [class.text-charcoal-light]="!isAttending"
-              [class.hover:border-sage-400]="!isAttending"
+              [class.hover:border-blush-300]="!isAttending"
               (click)="selectAttendance('attending')"
             >
               {{ wedding.rsvp.attending }}
             </button>
             <button
               type="button"
-              class="rounded-xl border-2 px-4 py-4 text-sm font-medium transition-all duration-300"
-              [class.border-sage-600]="!isAttending"
-              [class.bg-sage-600]="!isAttending"
+              class="rounded-xl border-2 px-3 py-3.5 text-sm font-medium transition-all duration-300 sm:px-4 sm:py-4"
+              [class.border-blush-400]="!isAttending"
+              [class.bg-blush-400]="!isAttending"
               [class.text-cream-50]="!isAttending"
+              [class.shadow-sm]="!isAttending"
               [class.border-cream-200]="isAttending"
               [class.bg-white]="isAttending"
               [class.text-charcoal-light]="isAttending"
-              [class.hover:border-sage-400]="isAttending"
+              [class.hover:border-blush-300]="isAttending"
               (click)="selectAttendance('declining')"
             >
               {{ wedding.rsvp.declining }}
@@ -107,33 +108,58 @@
           </div>
         </fieldset>
 
-        <!-- Plus Ones (conditional) -->
+        <!-- Event selection — only when invited to both and attending -->
+        @if (showEventPicker) {
+          <fieldset class="animate-fade-in-up">
+            <legend class="mb-3 block text-xs font-medium tracking-widest uppercase text-sage-600">
+              Which events will you attend?
+            </legend>
+            <div class="grid grid-cols-3 gap-2">
+              @for (opt of [{value: 'both', label: 'Both Events'}, {value: 'ceremony', label: 'Ceremony Only'}, {value: 'reception', label: 'Reception Only'}]; track opt.value) {
+                <button
+                  type="button"
+                  class="rounded-xl border-2 px-2 py-3 text-xs font-medium transition-all duration-200 sm:text-sm"
+                  [class.border-sage-600]="rsvpForm.value.attendingEvents === opt.value"
+                  [class.bg-sage-600]="rsvpForm.value.attendingEvents === opt.value"
+                  [class.text-cream-50]="rsvpForm.value.attendingEvents === opt.value"
+                  [class.border-cream-200]="rsvpForm.value.attendingEvents !== opt.value"
+                  [class.bg-white]="rsvpForm.value.attendingEvents !== opt.value"
+                  [class.text-charcoal-light]="rsvpForm.value.attendingEvents !== opt.value"
+                  (click)="selectAttendingEvents($any(opt.value))"
+                >
+                  {{ opt.label }}
+                </button>
+              }
+            </div>
+          </fieldset>
+        }
+
         @if (isAttending) {
-          <div class="animate-fade-in-up">
+          <div class="animate-fade-in-up rounded-xl bg-blush-50/60 p-4">
             <label
               for="plusOnes"
-              class="mb-2 block text-xs font-medium tracking-widest uppercase text-sage-600"
+              class="mb-1 block text-xs font-medium tracking-widest uppercase text-sage-600"
             >
               {{ wedding.rsvp.plusOnesLabel }}
             </label>
-            <p class="mb-3 text-xs text-charcoal-light">
+            <p class="mb-4 text-xs text-charcoal-light">
               {{ wedding.rsvp.plusOnesHint }}
             </p>
-            <div class="flex items-center gap-4">
+            <div class="flex items-center justify-center gap-5">
               <button
                 type="button"
-                class="flex h-10 w-10 items-center justify-center rounded-full border border-cream-200 text-charcoal transition-colors hover:border-sage-400 hover:bg-sage-500/10"
+                class="flex h-9 w-9 items-center justify-center rounded-full border border-blush-200 bg-white text-lg text-charcoal transition-colors hover:border-sage-400 hover:bg-sage-50"
                 (click)="decrementPlusOnes()"
                 aria-label="Decrease guests"
               >
                 −
               </button>
-              <span class="font-serif text-2xl text-charcoal">{{
+              <span class="min-w-[2rem] text-center font-serif text-2xl text-sage-700">{{
                 rsvpForm.value.plusOnes
               }}</span>
               <button
                 type="button"
-                class="flex h-10 w-10 items-center justify-center rounded-full border border-cream-200 text-charcoal transition-colors hover:border-sage-400 hover:bg-sage-500/10"
+                class="flex h-9 w-9 items-center justify-center rounded-full border border-blush-200 bg-white text-lg text-charcoal transition-colors hover:border-sage-400 hover:bg-sage-50"
                 (click)="incrementPlusOnes()"
                 aria-label="Increase guests"
               >
@@ -141,10 +167,47 @@
               </button>
             </div>
           </div>
+          <!-- Stay Required toggle -->
+          <div class="flex items-center justify-between rounded-xl border border-cream-200 bg-white/70 px-4 py-3.5">
+            <div>
+              <p class="text-xs font-medium tracking-widest uppercase text-sage-600">Accommodation Required</p>
+              <p class="mt-0.5 text-xs text-charcoal-light">Do you need accommodation to be arranged?</p>
+            </div>
+            <button
+              type="button"
+              role="switch"
+              [attr.aria-checked]="rsvpForm.value.stayRequired"
+              (click)="toggleStay()"
+              class="relative inline-flex h-6 w-11 flex-shrink-0 cursor-pointer rounded-full border-2 border-transparent transition-colors duration-200 ease-in-out focus:outline-none focus:ring-2 focus:ring-sage-400 focus:ring-offset-2"
+              [class.bg-sage-600]="rsvpForm.value.stayRequired"
+              [class.bg-cream-200]="!rsvpForm.value.stayRequired"
+            >
+              <span
+                class="pointer-events-none inline-block h-5 w-5 rounded-full bg-white shadow ring-0 transition-transform duration-200 ease-in-out"
+                [class.translate-x-5]="rsvpForm.value.stayRequired"
+                [class.translate-x-0]="!rsvpForm.value.stayRequired"
+              ></span>
+            </button>
+          </div>
+
+          <div>
+            <label
+              for="dietary"
+              class="mb-2 block text-xs font-medium tracking-widest uppercase text-sage-600"
+            >
+              {{ wedding.rsvp.dietaryLabel }}
+            </label>
+            <input
+              id="dietary"
+              type="text"
+              formControlName="dietaryRestrictions"
+              [placeholder]="wedding.rsvp.dietaryPlaceholder"
+              class="w-full rounded-xl border border-cream-200 bg-cream-50/80 px-4 py-3 text-charcoal transition-colors placeholder:text-charcoal-light/40 focus:border-blush-300 focus:outline-none focus:ring-2 focus:ring-blush-200"
+            />
+          </div>
         }
 
-        <!-- Dietary Restrictions -->
-        <div>
+        <!-- <div>
           <label
             for="dietary"
             class="mb-2 block text-xs font-medium tracking-widest uppercase text-sage-600"
@@ -156,11 +219,10 @@
             type="text"
             formControlName="dietaryRestrictions"
             [placeholder]="wedding.rsvp.dietaryPlaceholder"
-            class="w-full rounded-xl border border-cream-200 bg-cream-50/50 px-4 py-3 text-charcoal transition-colors placeholder:text-charcoal-light/40 focus:border-sage-400 focus:outline-none focus:ring-2 focus:ring-sage-400/20"
+            class="w-full rounded-xl border border-cream-200 bg-cream-50/80 px-4 py-3 text-charcoal transition-colors placeholder:text-charcoal-light/40 focus:border-blush-300 focus:outline-none focus:ring-2 focus:ring-blush-200"
           />
-        </div>
+        </div> -->
 
-        <!-- Message -->
         <div>
           <label
             for="message"
@@ -173,7 +235,7 @@
             formControlName="message"
             rows="4"
             [placeholder]="wedding.rsvp.messagePlaceholder"
-            class="w-full resize-none rounded-xl border border-cream-200 bg-cream-50/50 px-4 py-3 text-charcoal transition-colors placeholder:text-charcoal-light/40 focus:border-sage-400 focus:outline-none focus:ring-2 focus:ring-sage-400/20"
+            class="w-full resize-none rounded-xl border border-cream-200 bg-cream-50/80 px-4 py-3 text-charcoal transition-colors placeholder:text-charcoal-light/40 focus:border-blush-300 focus:outline-none focus:ring-2 focus:ring-blush-200"
           ></textarea>
           @if (fieldError('message')) {
             <p class="mt-1 text-xs text-red-500">{{ fieldError('message') }}</p>

@@ -1,15 +1,16 @@
-<section id="story" class="section-padding bg-cream-50">
-  <div class="mx-auto max-w-3xl text-center">
+<section id="story" class="section-padding bg-gradient-to-b from-cream-50 to-blush-50/50">
+  <div class="section-header">
     <h2 appReveal class="section-heading">{{ wedding.story.title }}</h2>
-    <p appReveal [revealDelay]="100" class="section-subheading mx-auto">
+    <div appReveal [revealDelay]="50" class="section-accent"></div>
+    <p appReveal [revealDelay]="100" class="section-subheading">
       {{ wedding.story.subtitle }}
     </p>
   </div>
 
-  <div class="relative mx-auto mt-16 max-w-2xl">
+  <div class="section-container relative mt-16 max-w-3xl">
     <!-- Vertical line -->
     <div
-      class="absolute top-0 bottom-0 left-6 w-px bg-gradient-to-b from-blush-300 via-sage-400 to-blush-300 md:left-1/2 md:-translate-x-px"
+      class="absolute top-0 bottom-0 left-[1.125rem] w-px bg-gradient-to-b from-blush-300 via-sage-400 to-gold-400 md:left-1/2 md:-translate-x-px"
       aria-hidden="true"
     ></div>
 
@@ -17,33 +18,34 @@
       <div
         appReveal
         [revealDelay]="i * 100"
-        class="relative mb-12 flex items-start gap-6 md:mb-16"
-        [class.md:flex-row-reverse]="i % 2 !== 0"
+        class="relative mb-10 pl-12 md:mb-14 md:pl-0"
+        [ngClass]="{
+          'md:pr-[calc(50%+2rem)]': i % 2 === 0,
+          'md:pl-[calc(50%+2rem)]': i % 2 !== 0
+        }"
       >
         <!-- Dot -->
         <div
-          class="relative z-10 flex h-12 w-12 shrink-0 items-center justify-center rounded-full border-2 border-sage-500 bg-cream-50 md:absolute md:left-1/2 md:-translate-x-1/2"
+          class="absolute top-1 left-0 z-10 flex h-9 w-9 items-center justify-center rounded-full border-2 border-sage-500 bg-blush-50 md:left-1/2 md:-translate-x-1/2"
         >
-          <div class="h-3 w-3 rounded-full bg-sage-500"></div>
+          <div class="h-2.5 w-2.5 rounded-full bg-blush-400"></div>
         </div>
 
         <!-- Content card -->
         <div
-          class="card flex-1 md:w-[calc(50%-2.5rem)]"
-          [class.md:mr-auto]="i % 2 === 0"
-          [class.md:ml-auto]="i % 2 !== 0"
-          [class.md:pr-12]="i % 2 === 0"
-          [class.md:pl-12]="i % 2 !== 0"
+          class="card border-l-4"
+          [class.border-l-blush-300]="i % 2 === 0"
+          [class.border-l-sage-400]="i % 2 !== 0"
         >
           <time
-            class="text-xs font-medium tracking-[0.2em] uppercase text-sage-500"
+            class="inline-block rounded-full bg-sage-100 px-3 py-1 text-xs font-medium tracking-[0.15em] uppercase text-sage-600"
           >
             {{ milestone.date }}
           </time>
-          <h3 class="mt-2 font-serif text-2xl font-medium text-charcoal">
+          <h3 class="mt-3 font-serif text-xl font-medium text-charcoal md:text-2xl">
             {{ milestone.title }}
           </h3>
-          <p class="mt-3 text-sm leading-relaxed text-charcoal-light md:text-base">
+          <p class="mt-2 text-sm leading-relaxed text-charcoal-light md:text-base">
             {{ milestone.description }}
           </p>
         </div>

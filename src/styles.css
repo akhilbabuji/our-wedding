@@ -1,40 +1,118 @@
 @import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&family=Jost:wght@300;400;500;600&display=swap');
 
-@import 'tailwindcss';
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
 
-@theme {
-  --color-cream-50: #fdfbf7;
-  --color-cream-100: #f9f5ef;
-  --color-cream-200: #f3ece2;
-  --color-blush-100: #f8e8e4;
-  --color-blush-200: #f0d4cc;
-  --color-blush-300: #e8bfb4;
-  --color-blush-400: #d4a094;
-  --color-sage-400: #8a9a7b;
-  --color-sage-500: #6b7c62;
-  --color-sage-600: #55634e;
-  --color-sage-700: #3f4a3a;
-  --color-charcoal: #2c2c2c;
-  --color-charcoal-light: #4a4a4a;
+@layer base {
+  html {
+    scroll-behavior: smooth;
+  }
 
-  --font-serif: 'Cormorant Garamond', Georgia, serif;
-  --font-sans: 'Jost', system-ui, sans-serif;
+  body {
+    @apply font-sans text-charcoal antialiased;
+    margin: 0;
+    background-color: #fdf8f3;
+    background-image: url('/gallery/engagement-2.png');
+    background-attachment: fixed;
+    background-size: cover;
+    background-position: center;
+  }
+
+  /* Soft overlay so text stays legible over the photo */
+  body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    z-index: 0;
+    background: rgba(253, 248, 243, 0.82);
+    pointer-events: none;
+  }
+
+  /* Ensure all content sits above the overlay */
+  app-root {
+    position: relative;
+    z-index: 1;
+    display: block;
+  }
+
+  svg {
+    display: block;
+    flex-shrink: 0;
+  }
 }
 
-html {
-  scroll-behavior: smooth;
+@layer components {
+  .section-padding {
+    @apply px-5 py-20 md:px-8 md:py-28 lg:px-12;
+  }
+
+  .section-container {
+    @apply mx-auto w-full max-w-6xl;
+  }
+
+  .section-header {
+    @apply mx-auto max-w-3xl text-center;
+  }
+
+  .section-heading {
+    @apply font-serif text-4xl font-medium tracking-wide text-charcoal md:text-5xl lg:text-6xl;
+  }
+
+  .section-subheading {
+    @apply mx-auto mt-4 max-w-xl text-base font-light leading-relaxed text-charcoal-light md:text-lg;
+  }
+
+  .section-accent {
+    @apply mx-auto mt-4 h-px w-16 bg-gradient-to-r from-transparent via-blush-400 to-transparent;
+  }
+
+  .icon-sm {
+    @apply h-4 w-4 shrink-0;
+  }
+
+  .icon-md {
+    @apply h-5 w-5 shrink-0;
+  }
+
+  .icon-lg {
+    @apply h-6 w-6 shrink-0;
+  }
+
+  .btn-primary {
+    @apply inline-flex items-center justify-center rounded-full border border-sage-600 bg-sage-600 px-8 py-3 text-sm font-medium tracking-widest uppercase text-cream-50 shadow-sm transition-all duration-300 hover:border-sage-700 hover:bg-sage-700 hover:shadow-md focus:outline-none focus:ring-2 focus:ring-sage-400 focus:ring-offset-2 focus:ring-offset-cream-50;
+  }
+
+  .btn-outline {
+    @apply inline-flex items-center justify-center gap-2 rounded-full border border-sage-500 px-6 py-3 text-sm font-medium tracking-widest uppercase text-sage-600 transition-all duration-300 hover:bg-sage-500 hover:text-cream-50 focus:outline-none focus:ring-2 focus:ring-sage-400 focus:ring-offset-2 focus:ring-offset-cream-50;
+  }
+
+  .card {
+    @apply rounded-2xl border border-cream-200 bg-white/80 p-6 shadow-sm backdrop-blur-sm transition-all duration-300 hover:border-blush-200 hover:shadow-md md:p-8;
+  }
+
+  .countdown-card {
+    @apply rounded-xl border border-blush-200 bg-gradient-to-b from-white to-blush-50 px-3 py-4 text-center shadow-sm md:px-4 md:py-5;
+  }
+
+  .event-meta-row {
+    @apply grid grid-cols-[1.25rem_1fr] items-start gap-x-3 gap-y-1 text-sm text-charcoal-light;
+  }
 }
 
-body {
-  @apply bg-cream-50 text-charcoal font-sans antialiased;
-}
+@layer utilities {
+  .animate-fade-in-up {
+    animation: fade-in-up 0.8s ease-out forwards;
+  }
 
-.font-serif {
-  font-family: var(--font-serif);
-}
+  .animate-fade-in {
+    animation: fade-in 0.6s ease-out forwards;
+  }
 
-.font-sans {
-  font-family: var(--font-sans);
+  .animate-scale-in {
+    animation: scale-in 0.5s ease-out forwards;
+  }
+
 }
 
 @keyframes fade-in-up {
@@ -68,51 +146,63 @@ body {
   }
 }
 
-.animate-fade-in-up {
-  animation: fade-in-up 0.8s ease-out forwards;
-}
-
-.animate-fade-in {
-  animation: fade-in 0.6s ease-out forwards;
-}
-
-.animate-scale-in {
-  animation: scale-in 0.5s ease-out forwards;
-}
-
+/* ── Scroll-reveal animations ─────────────────────── */
+/*
+  These are plain CSS (outside @layer) so Tailwind never purges them.
+  Classes are applied dynamically via RevealDirective.
+*/
 .reveal {
   opacity: 0;
-  transform: translateY(24px);
   transition:
-    opacity 0.8s ease-out,
-    transform 0.8s ease-out;
+    opacity 0.75s cubic-bezier(0.22, 1, 0.36, 1),
+    transform 0.75s cubic-bezier(0.22, 1, 0.36, 1);
 }
+
+.reveal-default { transform: translateY(28px); }
+.reveal-bottom  { transform: translateY(52px) scale(0.96); }
+.reveal-left    { transform: translateX(-56px) scale(0.97); }
+.reveal-right   { transform: translateX(56px)  scale(0.97); }
 
 .reveal.visible {
   opacity: 1;
-  transform: translateY(0);
+  transform: translateY(0) translateX(0) scale(1);
 }
 
-.section-padding {
-  @apply px-5 py-20 md:px-8 md:py-28 lg:px-12;
+/* ── Splash screen ────────────────────────────────── */
+.splash-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: radial-gradient(ellipse at center, #fdf6ee 0%, #f5ece0 100%);
+  animation: splash-in 0.5s ease-out forwards;
 }
 
-.section-heading {
-  @apply font-serif text-4xl font-medium tracking-wide text-charcoal md:text-5xl lg:text-6xl;
+.splash-overlay.splash-hide {
+  animation: splash-out 0.7s ease-in forwards;
 }
 
-.section-subheading {
-  @apply mt-4 max-w-xl text-base font-light leading-relaxed text-charcoal-light md:text-lg;
+.splash-scene {
+  width: min(88vw, 380px);
+  height: auto;
+  animation: splash-scene-in 0.8s 0.1s ease-out both;
+  filter: drop-shadow(0 8px 32px rgba(180, 140, 100, 0.15));
 }
 
-.btn-primary {
-  @apply inline-flex items-center justify-center rounded-full border border-sage-600 bg-sage-600 px-8 py-3 text-sm font-medium tracking-widest uppercase text-cream-50 transition-all duration-300 hover:border-sage-700 hover:bg-sage-700 focus:outline-none focus:ring-2 focus:ring-sage-400 focus:ring-offset-2 focus:ring-offset-cream-50;
+@keyframes splash-in {
+  from { opacity: 0; }
+  to   { opacity: 1; }
 }
 
-.btn-outline {
-  @apply inline-flex items-center justify-center rounded-full border border-sage-500 px-8 py-3 text-sm font-medium tracking-widest uppercase text-sage-600 transition-all duration-300 hover:bg-sage-500 hover:text-cream-50 focus:outline-none focus:ring-2 focus:ring-sage-400 focus:ring-offset-2 focus:ring-offset-cream-50;
+@keyframes splash-out {
+  0%   { opacity: 1; transform: scale(1);    }
+  100% { opacity: 0; transform: scale(1.04); }
 }
 
-.card {
-  @apply rounded-2xl border border-cream-200 bg-white/70 p-8 shadow-sm backdrop-blur-sm transition-all duration-300 hover:shadow-md;
+@keyframes splash-scene-in {
+  from { opacity: 0; transform: translateY(18px) scale(0.96); }
+  to   { opacity: 1; transform: translateY(0)    scale(1);    }
 }
+

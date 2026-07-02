@@ -1,21 +1,25 @@
 <nav
-  class="fixed top-0 right-0 left-0 z-40 border-b border-cream-200/50 bg-cream-50/80 backdrop-blur-md"
+  class="fixed top-0 right-0 left-0 z-40 border-b border-blush-200/60 bg-cream-50/90 backdrop-blur-md"
 >
-  <div class="mx-auto flex max-w-6xl items-center justify-between px-5 py-4 md:px-8">
+  <div class="mx-auto flex max-w-6xl items-center justify-between px-5 py-3.5 md:px-8 md:py-4">
     <a
       href="#"
       class="font-serif text-lg font-medium tracking-wide text-charcoal md:text-xl"
     >
-      {{ wedding.couple.displayNames }}
+      <span class="text-blush-400">{{ wedding.couple.partnerOne.charAt(0) }}</span
+      >{{ wedding.couple.partnerOne.slice(1) }}
+      <span class="mx-1 text-blush-400 italic">&</span>
+      <span class="text-sage-600">{{ wedding.couple.partnerTwo.charAt(0) }}</span
+      >{{ wedding.couple.partnerTwo.slice(1) }}
     </a>
 
-    <!-- Desktop nav -->
     <ul class="hidden items-center gap-8 md:flex">
       @for (link of links; track link.href) {
         <li>
           <a
             [href]="link.href"
-            class="text-xs font-medium tracking-[0.15em] uppercase text-charcoal-light transition-colors hover:text-sage-600"
+            (click)="navigate($event, link.href.slice(1))"
+            class="text-xs font-medium tracking-[0.15em] uppercase text-charcoal-light transition-colors hover:text-blush-500 cursor-pointer"
           >
             {{ link.label }}
           </a>
@@ -23,10 +27,9 @@
       }
     </ul>
 
-    <!-- Mobile menu button -->
     <button
       type="button"
-      class="rounded-lg p-2 text-charcoal md:hidden"
+      class="inline-flex items-center justify-center rounded-lg p-2 text-charcoal md:hidden"
       (click)="toggleMenu()"
       [attr.aria-expanded]="isMenuOpen"
       aria-label="Toggle navigation menu"
@@ -34,10 +37,12 @@
       @if (isMenuOpen) {
         <svg
           xmlns="http://www.w3.org/2000/svg"
-          class="h-6 w-6"
+          class="icon-lg"
           fill="none"
           viewBox="0 0 24 24"
           stroke="currentColor"
+          width="24"
+          height="24"
         >
           <path
             stroke-linecap="round"
@@ -49,10 +54,12 @@
       } @else {
         <svg
           xmlns="http://www.w3.org/2000/svg"
-          class="h-6 w-6"
+          class="icon-lg"
           fill="none"
           viewBox="0 0 24 24"
           stroke="currentColor"
+          width="24"
+          height="24"
         >
           <path
             stroke-linecap="round"
@@ -65,18 +72,17 @@
     </button>
   </div>
 
-  <!-- Mobile menu -->
   @if (isMenuOpen) {
     <div
-      class="border-t border-cream-200 bg-cream-50/95 px-5 py-4 backdrop-blur-md md:hidden animate-fade-in"
+      class="border-t border-blush-100 bg-cream-50/95 px-5 py-4 backdrop-blur-md md:hidden animate-fade-in"
     >
-      <ul class="space-y-4">
+      <ul class="space-y-3">
         @for (link of links; track link.href) {
           <li>
             <a
               [href]="link.href"
-              class="block text-sm font-medium tracking-[0.15em] uppercase text-charcoal-light transition-colors hover:text-sage-600"
-              (click)="closeMenu()"
+              (click)="navigate($event, link.href.slice(1))"
+              class="block py-1 text-sm font-medium tracking-[0.15em] uppercase text-charcoal-light transition-colors hover:text-blush-500 cursor-pointer"
             >
               {{ link.label }}
             </a>

@@ -6,19 +6,20 @@
     aria-label="Image gallery lightbox"
     (click)="close()"
   >
-    <!-- Close button -->
     <button
       type="button"
-      class="absolute top-5 right-5 z-10 rounded-full p-2 text-cream-50 transition-colors hover:bg-white/10"
+      class="absolute top-4 right-4 z-10 flex h-10 w-10 items-center justify-center rounded-full text-cream-50 transition-colors hover:bg-white/10 sm:top-5 sm:right-5"
       aria-label="Close lightbox"
       (click)="close(); $event.stopPropagation()"
     >
       <svg
         xmlns="http://www.w3.org/2000/svg"
-        class="h-8 w-8"
+        class="icon-md"
         fill="none"
         viewBox="0 0 24 24"
         stroke="currentColor"
+        width="20"
+        height="20"
       >
         <path
           stroke-linecap="round"
@@ -29,19 +30,20 @@
       </svg>
     </button>
 
-    <!-- Previous -->
     <button
       type="button"
-      class="absolute left-4 z-10 rounded-full p-3 text-cream-50 transition-colors hover:bg-white/10 md:left-8"
+      class="absolute left-3 z-10 flex h-10 w-10 items-center justify-center rounded-full text-cream-50 transition-colors hover:bg-white/10 sm:left-6 md:left-8"
       aria-label="Previous image"
       (click)="prev(); $event.stopPropagation()"
     >
       <svg
         xmlns="http://www.w3.org/2000/svg"
-        class="h-8 w-8"
+        class="icon-md"
         fill="none"
         viewBox="0 0 24 24"
         stroke="currentColor"
+        width="20"
+        height="20"
       >
         <path
           stroke-linecap="round"
@@ -52,9 +54,8 @@
       </svg>
     </button>
 
-    <!-- Image -->
     <div
-      class="mx-16 max-h-[85vh] max-w-5xl animate-scale-in"
+      class="mx-14 max-h-[85vh] max-w-5xl animate-scale-in sm:mx-16"
       (click)="$event.stopPropagation()"
     >
       <img
@@ -63,7 +64,7 @@
         class="max-h-[80vh] w-full rounded-lg object-contain shadow-2xl"
       />
       @if (currentImage.caption) {
-        <p class="mt-4 text-center text-sm tracking-wide text-cream-200">
+        <p class="mt-4 text-center text-sm tracking-wide text-blush-100">
           {{ currentImage.caption }}
         </p>
       }
@@ -72,19 +73,20 @@
       </p>
     </div>
 
-    <!-- Next -->
     <button
       type="button"
-      class="absolute right-4 z-10 rounded-full p-3 text-cream-50 transition-colors hover:bg-white/10 md:right-8"
+      class="absolute right-3 z-10 flex h-10 w-10 items-center justify-center rounded-full text-cream-50 transition-colors hover:bg-white/10 sm:right-6 md:right-8"
       aria-label="Next image"
       (click)="next(); $event.stopPropagation()"
     >
       <svg
         xmlns="http://www.w3.org/2000/svg"
-        class="h-8 w-8"
+        class="icon-md"
         fill="none"
         viewBox="0 0 24 24"
         stroke="currentColor"
+        width="20"
+        height="20"
       >
         <path
           stroke-linecap="round"

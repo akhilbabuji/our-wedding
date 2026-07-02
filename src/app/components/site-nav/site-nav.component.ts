@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { WEDDING_DATA } from '../../config/wedding-data';
+import { SplashService } from '../../services/splash.service';
 
 @Component({
   selector: 'app-site-nav',
@@ -10,13 +11,14 @@ export class SiteNavComponent {
   readonly wedding = WEDDING_DATA;
 
   readonly links = [
-    { label: 'Story', href: '#story' },
-    { label: 'Events', href: '#events' },
+    { label: 'Events',  href: '#events'  },
     { label: 'Gallery', href: '#gallery' },
-    { label: 'RSVP', href: '#rsvp' },
+    { label: 'RSVP',    href: '#rsvp'    },
   ];
 
   isMenuOpen = false;
+
+  constructor(private readonly splash: SplashService) {}
 
   toggleMenu(): void {
     this.isMenuOpen = !this.isMenuOpen;
@@ -24,5 +26,15 @@ export class SiteNavComponent {
 
   closeMenu(): void {
     this.isMenuOpen = false;
+  }
+
+  navigate(event: Event, sectionId: string): void {
+    event.preventDefault();
+    this.isMenuOpen = false;
+
+    this.splash.show(() => {
+      const el = document.getElementById(sectionId);
+      el?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    });
   }
 }

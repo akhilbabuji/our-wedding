@@ -1,120 +1,265 @@
 <section
-  class="relative flex min-h-screen flex-col items-center justify-center overflow-hidden bg-gradient-to-b from-cream-100 via-blush-100/40 to-cream-50 px-5 pt-24 pb-16 text-center"
+  class="relative flex min-h-screen flex-col items-center justify-center overflow-hidden bg-gradient-to-br from-blush-50 via-cream-100 to-sage-50 px-4 pt-20 pb-10 md:pb-16 text-center"
 >
-  <!-- Decorative elements -->
-  <div
-    class="pointer-events-none absolute inset-0 opacity-30"
-    aria-hidden="true"
-  >
-    <div
-      class="absolute -top-32 -right-32 h-96 w-96 rounded-full bg-blush-200/50 blur-3xl"
-    ></div>
-    <div
-      class="absolute -bottom-32 -left-32 h-96 w-96 rounded-full bg-sage-400/20 blur-3xl"
-    ></div>
+  <!-- Ambient blurs -->
+  <div class="pointer-events-none absolute inset-0" aria-hidden="true">
+    <div class="absolute -top-32 -right-32 h-96 w-96 rounded-full bg-blush-200/50 blur-3xl"></div>
+    <div class="absolute -bottom-32 -left-32 h-96 w-96 rounded-full bg-sage-200/40 blur-3xl"></div>
+    <div class="absolute top-1/2 left-1/2 h-64 w-64 -translate-x-1/2 -translate-y-1/2 rounded-full bg-gold-300/15 blur-3xl"></div>
   </div>
 
-  <div class="relative z-10 mx-auto max-w-4xl">
-    <!-- Personalized / generic welcome -->
-    <p
-      appReveal
-      class="mx-auto mb-8 max-w-2xl text-sm font-medium tracking-[0.25em] uppercase text-sage-600 md:text-base"
-    >
-      @if (guest) {
-        <span class="block text-blush-400">✦</span>
-      }
-      Save the Date
-    </p>
+  <div class="relative z-10 w-full max-w-3xl mx-auto flex flex-col items-center">
+
+    <!-- Welcome / Save the Date -->
+    <div appReveal class="mb-2">
+      <span class="mb-1 inline-block text-base text-blush-400">✦</span>
+      <p class="text-xs font-medium tracking-[0.3em] uppercase text-sage-600 md:text-sm">
+        Save the Date
+      </p>
+      <div class="section-accent"></div>
+    </div>
 
     <p
       appReveal
-      [revealDelay]="100"
-      class="mx-auto mb-10 max-w-2xl font-serif text-xl leading-relaxed text-charcoal-light italic md:text-2xl lg:text-3xl"
-      [class.text-charcoal]="guest"
+      [revealDelay]="80"
+      class="mb-2 max-w-xl font-serif text-base leading-relaxed italic md:text-lg"
+      [class.text-blush-500]="!!guest"
+      [class.text-charcoal-light]="!guest"
     >
       {{ welcomeMessage }}
     </p>
 
-    <!-- Couple names -->
-    <h1
-      appReveal
-      [revealDelay]="200"
-      class="font-serif text-6xl font-medium tracking-wide text-charcoal md:text-7xl lg:text-8xl"
-    >
-      {{ wedding.couple.partnerOne }}
-      <span class="mx-3 text-blush-400 font-light italic">&</span>
-      {{ wedding.couple.partnerTwo }}
-    </h1>
+    <!-- ── Mandap altar frame with names + date inside ── -->
+    <div class="relative w-full">
 
-    <p
-      appReveal
-      [revealDelay]="300"
-      class="mt-6 font-serif text-lg text-sage-500 italic md:text-xl"
-    >
+      <!-- Mandap SVG frame — reveals first so arch is visible before text -->
+      <div appReveal [revealDelay]="120">
+      <svg
+        viewBox="0 0 600 520"
+        fill="none"
+        xmlns="http://www.w3.org/2000/svg"
+        class="w-full"
+        aria-hidden="true"
+        style="filter: drop-shadow(0 6px 24px rgba(180,140,100,0.12))"
+      >
+        <!-- ── Pillars ───────────────────────────── -->
+        <rect x="68"  y="220" width="14" height="240" rx="7" fill="#c9b89a" opacity="0.55"/>
+        <rect x="518" y="220" width="14" height="240" rx="7" fill="#c9b89a" opacity="0.55"/>
+        <!-- pillar caps -->
+        <rect x="60"  y="214" width="30" height="12" rx="6" fill="#d4c4a8" opacity="0.6"/>
+        <rect x="510" y="214" width="30" height="12" rx="6" fill="#d4c4a8" opacity="0.6"/>
+
+        <!-- ── Main arch ──────────────────────────── -->
+        <path d="M82 222 Q300 30 518 222" stroke="#c9b89a" stroke-width="11" fill="none" stroke-linecap="round" opacity="0.6"/>
+        <!-- Inner arch highlight -->
+        <path d="M96 228 Q300 52 504 228" stroke="#e8d5b8" stroke-width="4"  fill="none" stroke-linecap="round" opacity="0.45"/>
+        <!-- Outer arch accent -->
+        <path d="M72 218 Q300 14 528 218" stroke="#d4c4a8" stroke-width="3"  fill="none" stroke-linecap="round" opacity="0.3"/>
+
+        <!-- ── Torana (top beam) ──────────────────── -->
+        <rect x="62" y="208" width="476" height="0" rx="0" fill="none"/>
+
+        <!-- ── Hanging flower clusters ─────────────── -->
+        <!-- Far left -->
+        <line x1="148" y1="110" x2="148" y2="148" stroke="#b88fa0" stroke-width="1.2" opacity="0.7"/>
+        <circle cx="148" cy="155" r="9"  fill="#d4a0b0" opacity="0.75"/>
+        <circle cx="139" cy="147" r="6"  fill="#e8bcc8" opacity="0.6"/>
+        <circle cx="157" cy="147" r="6"  fill="#e8bcc8" opacity="0.6"/>
+        <circle cx="148" cy="138" r="5"  fill="#f0d0da" opacity="0.5"/>
+
+        <line x1="190" y1="78"  x2="190" y2="118" stroke="#b88fa0" stroke-width="1.2" opacity="0.7"/>
+        <circle cx="190" cy="125" r="9"  fill="#d4a0b0" opacity="0.75"/>
+        <circle cx="181" cy="117" r="6"  fill="#e8bcc8" opacity="0.6"/>
+        <circle cx="199" cy="117" r="6"  fill="#e8bcc8" opacity="0.6"/>
+
+        <line x1="238" y1="54"  x2="238" y2="96"  stroke="#b88fa0" stroke-width="1.2" opacity="0.7"/>
+        <circle cx="238" cy="103" r="9"  fill="#d4a0b0" opacity="0.75"/>
+        <circle cx="229" cy="95"  r="6"  fill="#e8bcc8" opacity="0.6"/>
+        <circle cx="247" cy="95"  r="6"  fill="#e8bcc8" opacity="0.6"/>
+
+        <!-- Centre peak -->
+        <line x1="300" y1="36"  x2="300" y2="80"  stroke="#b88fa0" stroke-width="1.4" opacity="0.75"/>
+        <circle cx="300" cy="88"  r="12" fill="#d4a0b0" opacity="0.85"/>
+        <circle cx="288" cy="79"  r="8"  fill="#e8bcc8" opacity="0.7"/>
+        <circle cx="312" cy="79"  r="8"  fill="#e8bcc8" opacity="0.7"/>
+        <circle cx="300" cy="68"  r="6"  fill="#f0d0da" opacity="0.6"/>
+        <circle cx="300" cy="88"  r="4"  fill="#fff0f4" opacity="0.9"/>
+
+        <!-- Far right -->
+        <line x1="362" y1="54"  x2="362" y2="96"  stroke="#b88fa0" stroke-width="1.2" opacity="0.7"/>
+        <circle cx="362" cy="103" r="9"  fill="#d4a0b0" opacity="0.75"/>
+        <circle cx="353" cy="95"  r="6"  fill="#e8bcc8" opacity="0.6"/>
+        <circle cx="371" cy="95"  r="6"  fill="#e8bcc8" opacity="0.6"/>
+
+        <line x1="410" y1="78"  x2="410" y2="118" stroke="#b88fa0" stroke-width="1.2" opacity="0.7"/>
+        <circle cx="410" cy="125" r="9"  fill="#d4a0b0" opacity="0.75"/>
+        <circle cx="401" cy="117" r="6"  fill="#e8bcc8" opacity="0.6"/>
+        <circle cx="419" cy="117" r="6"  fill="#e8bcc8" opacity="0.6"/>
+
+        <line x1="452" y1="110" x2="452" y2="148" stroke="#b88fa0" stroke-width="1.2" opacity="0.7"/>
+        <circle cx="452" cy="155" r="9"  fill="#d4a0b0" opacity="0.75"/>
+        <circle cx="443" cy="147" r="6"  fill="#e8bcc8" opacity="0.6"/>
+        <circle cx="461" cy="147" r="6"  fill="#e8bcc8" opacity="0.6"/>
+        <circle cx="452" cy="138" r="5"  fill="#f0d0da" opacity="0.5"/>
+
+        <!-- ── Garland foliage on arch ─────────────── -->
+        <path d="M84 218 Q160 158 216 118" stroke="#7a9e6a" stroke-width="2.5" fill="none" opacity="0.4"/>
+        <ellipse cx="114" cy="196" rx="11" ry="6" transform="rotate(-55 114 196)" fill="#8fb87a" opacity="0.42"/>
+        <ellipse cx="148" cy="172" rx="11" ry="6" transform="rotate(-50 148 172)" fill="#8fb87a" opacity="0.38"/>
+        <ellipse cx="184" cy="146" rx="10" ry="5" transform="rotate(-45 184 146)" fill="#a0c48a" opacity="0.35"/>
+
+        <path d="M516 218 Q440 158 384 118" stroke="#7a9e6a" stroke-width="2.5" fill="none" opacity="0.4"/>
+        <ellipse cx="486" cy="196" rx="11" ry="6" transform="rotate(55 486 196)"  fill="#8fb87a" opacity="0.42"/>
+        <ellipse cx="452" cy="172" rx="11" ry="6" transform="rotate(50 452 172)"  fill="#8fb87a" opacity="0.38"/>
+        <ellipse cx="416" cy="146" rx="10" ry="5" transform="rotate(45 416 146)"  fill="#a0c48a" opacity="0.35"/>
+
+        <!-- ── Ground platform ────────────────────── -->
+        <rect x="40"  y="456" width="520" height="14" rx="7" fill="#c9b89a" opacity="0.35"/>
+        <rect x="20"  y="464" width="560" height="8"  rx="4" fill="#d4c4a8" opacity="0.22"/>
+
+        <!-- ── Flower pots left ───────────────────── -->
+        <rect x="44"  y="428" width="34" height="28" rx="5" fill="#b89870" opacity="0.5"/>
+        <rect x="38"  y="422" width="46" height="10" rx="5" fill="#c9a87c" opacity="0.5"/>
+        <path d="M61 422 Q46 395 34 376" stroke="#6a8c5a" stroke-width="2"  fill="none" opacity="0.5"/>
+        <ellipse cx="32" cy="373" rx="12" ry="7" transform="rotate(-30 32 373)" fill="#7aaa68" opacity="0.5"/>
+        <path d="M61 422 Q70 393 82 375" stroke="#6a8c5a" stroke-width="2"  fill="none" opacity="0.5"/>
+        <ellipse cx="84" cy="372" rx="12" ry="7" transform="rotate(20 84 372)"  fill="#7aaa68" opacity="0.48"/>
+        <path d="M61 422 Q61 394 61 375" stroke="#6a8c5a" stroke-width="2"  fill="none" opacity="0.5"/>
+        <ellipse cx="61" cy="373" rx="10" ry="6" fill="#7aaa68" opacity="0.45"/>
+        <circle cx="32" cy="367" r="7" fill="#e8a0b0" opacity="0.75"/>
+        <circle cx="84" cy="365" r="7" fill="#e8a0b0" opacity="0.75"/>
+        <circle cx="61" cy="366" r="7" fill="#f0b8c0" opacity="0.7"/>
+
+        <!-- ── Flower pots right ──────────────────── -->
+        <rect x="522" y="428" width="34" height="28" rx="5" fill="#b89870" opacity="0.5"/>
+        <rect x="516" y="422" width="46" height="10" rx="5" fill="#c9a87c" opacity="0.5"/>
+        <path d="M539 422 Q524 395 512 376" stroke="#6a8c5a" stroke-width="2" fill="none" opacity="0.5"/>
+        <ellipse cx="510" cy="373" rx="12" ry="7" transform="rotate(-20 510 373)" fill="#7aaa68" opacity="0.5"/>
+        <path d="M539 422 Q548 393 560 375" stroke="#6a8c5a" stroke-width="2" fill="none" opacity="0.5"/>
+        <ellipse cx="562" cy="372" rx="12" ry="7" transform="rotate(30 562 372)"  fill="#7aaa68" opacity="0.48"/>
+        <path d="M539 422 Q539 394 539 375" stroke="#6a8c5a" stroke-width="2" fill="none" opacity="0.5"/>
+        <ellipse cx="539" cy="373" rx="10" ry="6" fill="#7aaa68" opacity="0.45"/>
+        <circle cx="510" cy="367" r="7" fill="#e8a0b0" opacity="0.75"/>
+        <circle cx="562" cy="365" r="7" fill="#e8a0b0" opacity="0.75"/>
+        <circle cx="539" cy="366" r="7" fill="#f0b8c0" opacity="0.7"/>
+
+        <!-- ── Diya lamps at base ─────────────────── -->
+        <ellipse cx="75"  cy="458" rx="12" ry="5" fill="#e8c870" opacity="0.5"/>
+        <ellipse cx="525" cy="458" rx="12" ry="5" fill="#e8c870" opacity="0.5"/>
+        <!-- flames -->
+        <path d="M75 453 Q72 446 75 440 Q78 446 75 453Z" fill="#f0a020" opacity="0.7"/>
+        <path d="M525 453 Q522 446 525 440 Q528 446 525 453Z" fill="#f0a020" opacity="0.7"/>
+
+        <!-- ── Scattered petals ───────────────────── -->
+        <ellipse cx="160" cy="410" rx="6" ry="3" transform="rotate(30 160 410)"  fill="#e8bcc8" opacity="0.45"/>
+        <ellipse cx="440" cy="418" rx="6" ry="3" transform="rotate(-20 440 418)" fill="#e8bcc8" opacity="0.45"/>
+        <ellipse cx="220" cy="438" rx="5" ry="2.5" transform="rotate(50 220 438)"  fill="#f0d0da" opacity="0.4"/>
+        <ellipse cx="380" cy="442" rx="5" ry="2.5" transform="rotate(-40 380 442)" fill="#f0d0da" opacity="0.4"/>
+        <ellipse cx="300" cy="446" rx="4" ry="2"   transform="rotate(10 300 446)"  fill="#e8bcc8" opacity="0.35"/>
+      </svg>
+      </div>
+
+      <!-- ── Text content overlaid inside the arch blank area ── -->
+      <!--
+        SVG viewBox 600×520:
+          flowers end  ≈ y 175  → 175/520 = 33.7% from top
+          flower pots  ≈ y 375  → (520-375)/520 = 27.9% from bottom
+          pillars      ≈ x 82–518 → left/right pad ≈ 14%
+        We centre the text in the remaining band.
+      -->
+      <div class="absolute inset-0 flex flex-col items-center justify-center pt-[40%] pb-[18%] px-[15%]">
+
+        <!-- Couple names -->
+        <h1
+          class="font-serif font-medium tracking-wide text-charcoal leading-tight
+                 text-3xl sm:text-4xl md:text-5xl lg:text-6xl"
+        >
+          {{ wedding.couple.partnerOne }}
+          <span class="text-blush-400 font-light italic mx-1">&amp;</span>
+          {{ wedding.couple.partnerTwo }}
+        </h1>
+
+        <!-- Gold divider -->
+        <div
+          appReveal
+          revealFrom="bottom"
+          [revealDelay]="370"
+          class="my-2 h-px w-16 bg-gradient-to-r from-transparent via-gold-400 to-transparent opacity-70"
+        ></div>
+
+        <!-- Date -->
+        <p
+          appReveal
+          revealFrom="bottom"
+          [revealDelay]="430"
+          class="text-xs font-medium tracking-[0.2em] uppercase text-charcoal sm:text-sm"
+        >
+          {{ wedding.weddingDate.display }}
+        </p>
+
+        <!-- Time -->
+        <p
+          appReveal
+          revealFrom="bottom"
+          [revealDelay]="490"
+          class="mt-1 text-[10px] tracking-widest uppercase text-sage-600 sm:text-xs"
+        >
+          {{ wedding.weddingDate.time }}
+        </p>
+
+        <!-- Venue -->
+        <p
+          appReveal
+          revealFrom="bottom"
+          [revealDelay]="540"
+          class="mt-0.5 text-[10px] font-medium tracking-widest uppercase text-charcoal sm:text-xs"
+        >
+          {{ wedding.location.venue }}
+        </p>
+
+        <!-- City / country -->
+        <p
+          appReveal
+          revealFrom="bottom"
+          [revealDelay]="590"
+          class="mt-0.5 text-[10px] tracking-wider text-charcoal-light sm:text-xs"
+        >
+          {{ wedding.location.city }}, {{ wedding.location.country }}
+        </p>
+
+      </div>
+    </div>
+
+    <!-- Tagline -->
+    <p appReveal [revealDelay]="300" class="mt-2 font-serif text-base text-sage-600 italic md:text-lg">
       {{ wedding.hero.tagline }}
     </p>
 
-    <!-- Date & location -->
-    <div appReveal [revealDelay]="400" class="mt-10 space-y-2">
-      <p class="text-sm font-medium tracking-[0.2em] uppercase text-charcoal-light">
-        {{ wedding.weddingDate.display }}
-      </p>
-      <p class="text-sm tracking-widest uppercase text-sage-600">
-        {{ wedding.location.venue }} · {{ wedding.location.city }},
-        {{ wedding.location.country }}
-      </p>
-    </div>
-
-    <!-- Countdown -->
-    <div
-      appReveal
-      [revealDelay]="500"
-      class="mx-auto mt-14 grid max-w-lg grid-cols-4 gap-3 md:gap-6"
-    >
-      @for (unit of countdown(); track unit.label) {
+    <!-- Countdown — each card reveals from below with stagger -->
+    <div class="mx-auto mt-8 grid w-full max-w-md grid-cols-4 gap-2 sm:gap-4">
+      @for (unit of countdown(); track unit.label; let i = $index) {
         <div
-          class="rounded-xl border border-cream-200 bg-white/60 px-2 py-4 backdrop-blur-sm md:px-4 md:py-6"
+          appReveal
+          revealFrom="bottom"
+          [revealDelay]="300 + i * 90"
+          class="countdown-card"
         >
-          <span
-            class="block font-serif text-2xl font-medium text-charcoal md:text-4xl"
-          >
+          <span class="block font-serif text-2xl font-semibold text-sage-700 sm:text-3xl md:text-4xl">
             {{ unit.value | number: '2.0-0' }}
           </span>
-          <span
-            class="mt-1 block text-[10px] font-medium tracking-[0.15em] uppercase text-sage-500 md:text-xs"
-          >
+          <span class="mt-1 block text-[10px] font-medium tracking-[0.15em] uppercase text-blush-400 sm:text-xs">
             {{ unit.label }}
           </span>
         </div>
       }
     </div>
 
-    <!-- CTA -->
-    <div appReveal [revealDelay]="600" class="mt-14">
-      <button type="button" class="btn-primary" (click)="scrollToRsvp()">
-        RSVP Now
-      </button>
+    <!-- Scroll indicator — in-flow so it sits just below the countdown -->
+    <div class="mt-6 animate-bounce text-sage-400" aria-hidden="true">
+      <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" width="20" height="20">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M19 9l-7 7-7-7"/>
+      </svg>
     </div>
-  </div>
 
-  <!-- Scroll indicator -->
-  <div
-    class="absolute bottom-8 left-1/2 -translate-x-1/2 animate-bounce text-sage-400"
-    aria-hidden="true"
-  >
-    <svg
-      xmlns="http://www.w3.org/2000/svg"
-      class="h-6 w-6"
-      fill="none"
-      viewBox="0 0 24 24"
-      stroke="currentColor"
-    >
-      <path
-        stroke-linecap="round"
-        stroke-linejoin="round"
-        stroke-width="1.5"
-        d="M19 9l-7 7-7-7"
-      />
-    </svg>
   </div>
 </section>

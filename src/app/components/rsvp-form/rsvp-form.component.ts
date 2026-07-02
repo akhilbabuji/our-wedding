@@ -1,5 +1,6 @@
 import { Component, Input, OnInit, signal } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { ActivatedRoute } from '@angular/router';
 import {
   FormBuilder,
   FormGroup,
@@ -9,6 +10,7 @@ import {
 import { WEDDING_DATA } from '../../config/wedding-data';
 import {
   AttendanceStatus,
+  InvitedTo,
   ParsedGuest,
   RsvpSubmission,
 } from '../../models/rsvp.model';
@@ -23,6 +25,9 @@ import { RevealDirective } from '../../directives/reveal.directive';
 })
 export class RsvpFormComponent implements OnInit {
   @Input() guest: ParsedGuest | null = null;
+  @Input() invitedTo: InvitedTo = 'both';
+
+  private invitedToFromUrl: InvitedTo = 'both';
 
   readonly wedding = WEDDING_DATA;
   readonly isSubmitted = signal(false);
@@ -34,17 +39,28 @@ export class RsvpFormComponent implements OnInit {
 
   constructor(
     private readonly fb: FormBuilder,
-    private readonly rsvpService: RsvpService
+    private readonly rsvpService: RsvpService,
+    private readonly route: ActivatedRoute
   ) {}
 
   ngOnInit(): void {
+    // Read ?events= directly from URL — most reliable source
+    const raw = this.route.snapshot.queryParamMap.get('events')?.toLowerCase();
+    if (raw === 'ceremony' || raw === 'reception') {
+      this.invitedToFromUrl = raw;
+    } else {
+      this.invitedToFromUrl = this.invitedTo; // fall back to @Input if no URL param
+    }
+
     this.rsvpForm = this.fb.group({
       guestName: [
         this.guest?.displayName ?? '',
         [Validators.required, Validators.minLength(2)],
       ],
       attendance: ['attending' as AttendanceStatus, Validators.required],
+      attendingEvents: ['both' as InvitedTo],
       plusOnes: [0, [Validators.min(0), Validators.max(10)]],
+      stayRequired: [false],
       dietaryRestrictions: [''],
       message: ['', Validators.maxLength(500)],
     });
@@ -60,6 +76,14 @@ export class RsvpFormComponent implements OnInit {
     return this.rsvpForm.get('attendance')?.value === 'attending';
   }
 
+  get showEventPicker(): boolean {
+    return this.invitedToFromUrl === 'both' && this.isAttending;
+  }
+
+  selectAttendingEvents(value: InvitedTo): void {
+    this.rsvpForm.patchValue({ attendingEvents: value });
+  }
+
   get thankYouMessage(): string {
     const attendance = this.submittedAttendance();
     if (attendance === 'attending') {
@@ -73,6 +97,10 @@ export class RsvpFormComponent implements OnInit {
 
   selectAttendance(status: AttendanceStatus): void {
     this.rsvpForm.patchValue({ attendance: status });
+  }
+
+  toggleStay(): void {
+    this.rsvpForm.patchValue({ stayRequired: !this.rsvpForm.value.stayRequired });
   }
 
   decrementPlusOnes(): void {
@@ -95,10 +123,17 @@ export class RsvpFormComponent implements OnInit {
     this.submitError.set(null);
 
     const formValue = this.rsvpForm.value;
+    const isAttending = formValue.attendance === 'attending';
     const submission: RsvpSubmission = {
       guestName: formValue.guestName.trim(),
       attendance: formValue.attendance,
-      plusOnes: formValue.attendance === 'attending' ? formValue.plusOnes : 0,
+      invitedTo: this.invitedToFromUrl,
+      // Only save attendingEvents when invited to both and actually attending
+      ...(isAttending && this.invitedToFromUrl === 'both'
+        ? { attendingEvents: (formValue.attendingEvents as InvitedTo) ?? 'both' }
+        : {}),
+      plusOnes: isAttending ? formValue.plusOnes : 0,
+      stayRequired: isAttending ? !!formValue.stayRequired : false,
       dietaryRestrictions: formValue.dietaryRestrictions?.trim() ?? '',
       message: formValue.message?.trim() ?? '',
       submittedAt: new Date().toISOString(),
@@ -111,9 +146,9 @@ export class RsvpFormComponent implements OnInit {
         this.isSubmitted.set(true);
         this.isSubmitting.set(false);
       },
-      error: () => {
+      error: (err) => {
         this.submitError.set(
-          'Something went wrong. Please try again or contact us directly.'
+          err?.message ?? 'Something went wrong. Please try again or contact us directly.'
         );
         this.isSubmitting.set(false);
       },

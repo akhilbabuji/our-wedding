@@ -5,9 +5,9 @@ import { EventDetailsComponent } from '../../components/event-details/event-deta
 import { GalleryComponent } from '../../components/gallery/gallery.component';
 import { RsvpFormComponent } from '../../components/rsvp-form/rsvp-form.component';
 import { SiteFooterComponent } from '../../components/site-footer/site-footer.component';
-import { SiteNavComponent } from '../../components/site-nav/site-nav.component';
 import { SplashScreenComponent } from '../../components/splash-screen/splash-screen.component';
 import { GuestService } from '../../services/guest.service';
+import { SplashService } from '../../services/splash.service';
 import { ParsedGuest } from '../../models/rsvp.model';
 
 export type EventFilter = 'ceremony' | 'reception' | 'both';
@@ -21,7 +21,6 @@ export type EventFilter = 'ceremony' | 'reception' | 'both';
     GalleryComponent,
     RsvpFormComponent,
     SiteFooterComponent,
-    SiteNavComponent,
     SplashScreenComponent,
   ],
   templateUrl: './invite.component.html',
@@ -29,11 +28,15 @@ export type EventFilter = 'ceremony' | 'reception' | 'both';
 export class InviteComponent implements OnInit {
   readonly guest = signal<ParsedGuest | null>(null);
   readonly eventFilter = signal<EventFilter>('both');
+  readonly splashDone;
 
   constructor(
     private readonly route: ActivatedRoute,
-    private readonly guestService: GuestService
-  ) {}
+    private readonly guestService: GuestService,
+    private readonly splashService: SplashService,
+  ) {
+    this.splashDone = this.splashService.done;
+  }
 
   ngOnInit(): void {
     this.readRoute();

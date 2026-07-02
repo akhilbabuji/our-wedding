@@ -3,7 +3,6 @@ import { CommonModule } from '@angular/common';
 import { WEDDING_DATA } from '../../config/wedding-data';
 import { ParsedGuest } from '../../models/rsvp.model';
 import { RevealDirective } from '../../directives/reveal.directive';
-
 interface CountdownUnit {
   label: string;
   value: number;

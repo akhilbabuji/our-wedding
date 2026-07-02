@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, AfterViewInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { SplashService } from '../../services/splash.service';
 
@@ -8,7 +8,7 @@ import { SplashService } from '../../services/splash.service';
   imports: [CommonModule],
   templateUrl: './splash-screen.component.html',
 })
-export class SplashScreenComponent implements OnInit {
+export class SplashScreenComponent implements OnInit, AfterViewInit {
   readonly visible;
   readonly hiding;
 
@@ -18,7 +18,19 @@ export class SplashScreenComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    // Trigger automatically on first page load
     this.splash.show();
+  }
+
+  ngAfterViewInit(): void {
+    // ngAfterViewInit fires after Angular's view is in the DOM.
+    // One rAF after that = browser has definitely painted the Angular splash.
+    // Only NOW is it safe to fade out the pre-boot HTML splash.
+    requestAnimationFrame(() => {
+      const el = document.getElementById('pre-boot-splash');
+      if (!el) return;
+      el.style.transition = 'opacity 0.25s ease';
+      el.style.opacity = '0';
+      setTimeout(() => el.remove(), 280);
+    });
   }
 }

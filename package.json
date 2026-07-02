@@ -9,7 +9,7 @@
     "watch": "ng build --watch --configuration development",
     "test": "ng test",
     "export:rsvp": "node scripts/export-rsvp.js",
-    "deploy": "firebase deploy --only hosting,firestore"
+    "deploy": "ng build && firebase deploy --only hosting,firestore"
   },
   "private": true,
   "dependencies": {

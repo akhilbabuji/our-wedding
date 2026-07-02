@@ -168,6 +168,29 @@
   transform: translateY(0) translateX(0) scale(1);
 }
 
+/* ── Falling flower petals ───────────────────────── */
+@keyframes petal-fall {
+  0%   { transform: translateY(-40px) rotate(0deg)   translateX(0);      opacity: 0;   }
+  10%  { opacity: 1; }
+  85%  { opacity: 0.7; }
+  100% { transform: translateY(110vh) rotate(540deg) translateX(30px);   opacity: 0;   }
+}
+
+@keyframes petal-sway {
+  0%   { margin-left: 0; }
+  25%  { margin-left: 18px; }
+  75%  { margin-left: -14px; }
+  100% { margin-left: 0; }
+}
+
+.petal {
+  position: absolute;
+  top: 0;
+  border-radius: 60% 10% 60% 10%;
+  animation: petal-fall linear infinite, petal-sway ease-in-out infinite;
+  pointer-events: none;
+}
+
 /* ── Splash screen ────────────────────────────────── */
 .splash-overlay {
   position: fixed;
@@ -177,32 +200,17 @@
   align-items: center;
   justify-content: center;
   background: radial-gradient(ellipse at center, #fdf6ee 0%, #f5ece0 100%);
-  animation: splash-in 0.5s ease-out forwards;
 }
 
 .splash-overlay.splash-hide {
-  animation: splash-out 0.7s ease-in forwards;
+  opacity: 0;
+  transition: opacity 0.6s ease-in;
+  pointer-events: none;
 }
 
 .splash-scene {
   width: min(88vw, 380px);
   height: auto;
-  animation: splash-scene-in 0.8s 0.1s ease-out both;
   filter: drop-shadow(0 8px 32px rgba(180, 140, 100, 0.15));
-}
-
-@keyframes splash-in {
-  from { opacity: 0; }
-  to   { opacity: 1; }
-}
-
-@keyframes splash-out {
-  0%   { opacity: 1; transform: scale(1);    }
-  100% { opacity: 0; transform: scale(1.04); }
-}
-
-@keyframes splash-scene-in {
-  from { opacity: 0; transform: translateY(18px) scale(0.96); }
-  to   { opacity: 1; transform: translateY(0)    scale(1);    }
 }
 

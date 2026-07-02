@@ -1,11 +1,12 @@
 <app-splash-screen />
-<!-- <app-site-nav /> -->
 
-<main>
-  <app-hero [guest]="guest()" />
-  <app-event-details [eventFilter]="eventFilter()" />
-  <app-gallery />
-  <app-rsvp-form [guest]="guest()" [invitedTo]="eventFilter()" />
-</main>
+@if (splashDone()) {
+  <main>
+    <app-hero [guest]="guest()" />
+    <app-event-details [eventFilter]="eventFilter()" />
+    <app-gallery />
+    <app-rsvp-form [guest]="guest()" [invitedTo]="eventFilter()" />
+  </main>
 
-<app-site-footer />
+  <app-site-footer />
+}

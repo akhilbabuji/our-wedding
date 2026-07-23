@@ -52,6 +52,8 @@ export interface GalleryImage {
 export interface RsvpFormLabels {
   sectionTitle: string;
   sectionSubtitle: string;
+  sectionSubtitleDate: string;
+  sectionSubtitleEnd: string;
   nameLabel: string;
   namePlaceholder: string;
   attendanceLabel: string;

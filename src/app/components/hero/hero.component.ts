@@ -44,6 +44,10 @@ export class HeroComponent implements OnInit, OnDestroy {
     document.getElementById('rsvp')?.scrollIntoView({ behavior: 'smooth' });
   }
 
+  scrollToEvents(): void {
+    document.getElementById('events')?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  }
+
   private updateCountdown(): void {
     const target = new Date(this.wedding.weddingDate.iso).getTime();
     const now = Date.now();

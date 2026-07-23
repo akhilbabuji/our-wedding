@@ -61,7 +61,6 @@ export class RsvpFormComponent implements OnInit {
       attendingEvents: ['both' as InvitedTo],
       plusOnes: [0, [Validators.min(0), Validators.max(10)]],
       stayRequired: [false],
-      dietaryRestrictions: [''],
       message: ['', Validators.maxLength(500)],
     });
 
@@ -134,7 +133,7 @@ export class RsvpFormComponent implements OnInit {
         : {}),
       plusOnes: isAttending ? formValue.plusOnes : 0,
       stayRequired: isAttending ? !!formValue.stayRequired : false,
-      dietaryRestrictions: formValue.dietaryRestrictions?.trim() ?? '',
+      dietaryRestrictions: '',
       message: formValue.message?.trim() ?? '',
       submittedAt: new Date().toISOString(),
       guestSlug: this.guest?.slug,

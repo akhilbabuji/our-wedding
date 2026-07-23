@@ -9,7 +9,30 @@
       name="description"
       content="You are warmly invited to celebrate the wedding of Anusree & Akhil."
     />
-    <link rel="icon" type="image/x-icon" href="favicon.ico" />
+    <link rel="icon" type="image/png" href="logo.png?v=3" />
+    <link rel="apple-touch-icon" href="logo.png?v=3" />
+    <link rel="shortcut icon" href="favicon.ico?v=3" />
+
+    <!-- ── Open Graph — clean canonical pipe ── -->
+    <!-- og:url is ALWAYS the undecorated root. WhatsApp then reuses that     -->
+    <!-- cached preview for every /invite?events=… / guest-parameter link.   -->
+    <meta property="og:type"         content="website" />
+    <meta property="og:site_name"    content="Anusree & Akhil — Wedding Invitation" />
+    <meta property="og:url"          content="https://akhilwedsanusree.web.app" />
+    <meta property="og:title"        content="Anusree & Akhil are getting married! 💍" />
+    <meta property="og:description"  content="Join us on Sunday, August 23, 2026. You are warmly invited to celebrate with us as we begin our forever together." />
+    <meta property="og:image"        content="https://akhilwedsanusree.web.app/og-thumbnail.jpg?v=7" />
+    <meta property="og:image:type"   content="image/jpeg" />
+    <meta property="og:image:width"  content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:image:alt"    content="Anusree and Akhil — Wedding Invitation" />
+    <meta property="og:locale"       content="en_IN" />
+
+    <!-- ── Twitter / X card ── -->
+    <meta name="twitter:card"        content="summary_large_image" />
+    <meta name="twitter:title"       content="Anusree & Akhil are getting married! 💍" />
+    <meta name="twitter:description" content="Join us on Sunday, August 23, 2026. You are warmly invited to celebrate with us." />
+    <meta name="twitter:image"       content="https://akhilwedsanusree.web.app/og-thumbnail.jpg?v=7" />
 
     <!-- Pre-boot splash: visible immediately before any JS loads -->
     <style>
@@ -18,9 +41,74 @@
         inset: 0;
         z-index: 99999;
         display: flex;
+        flex-direction: column;
         align-items: center;
         justify-content: center;
         background: radial-gradient(ellipse at center, #fdf6ee 0%, #f5ece0 100%);
+        font-family: Georgia, 'Times New Roman', serif;
+        padding: 0.5rem 1rem;
+      }
+      #pre-boot-splash .pb-wrap {
+        position: relative;
+        width: min(92vw, 420px);
+      }
+      #pre-boot-splash .pb-mandap-text {
+        position: absolute;
+        top: 40%; bottom: 18%; left: 15%; right: 15%;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        text-align: center;
+      }
+      #pre-boot-splash .pb-monogram {
+        display: flex;
+        align-items: baseline;
+        justify-content: center;
+        gap: 0.08em;
+        line-height: 1;
+      }
+      #pre-boot-splash .pb-letter {
+        font-size: clamp(2.2rem, 9vw, 3.8rem);
+        color: #4a5568;
+      }
+      #pre-boot-splash .pb-amp {
+        font-size: clamp(1.4rem, 6vw, 2.4rem);
+        color: #c9a87c;
+        font-style: italic;
+        align-self: center;
+        margin: 0 0.05em;
+      }
+      #pre-boot-splash .pb-rule {
+        width: 48px;
+        height: 1px;
+        background: linear-gradient(to right, transparent, #c9a87c, transparent);
+        margin: 0.3rem auto;
+      }
+      #pre-boot-splash .pb-names {
+        font-size: clamp(0.55rem, 1.8vw, 0.75rem);
+        letter-spacing: 0.22em;
+        text-transform: uppercase;
+        color: #c9a87c;
+        margin: 0;
+      }
+      #pre-boot-splash .pb-btn {
+        margin-top: 0.25rem;
+        width: clamp(110px, 28vw, 148px);
+        height: clamp(110px, 28vw, 148px);
+        border-radius: 50%;
+        border: 3px solid #c9a87c;
+        background: transparent;
+        color: #c9a87c;
+        font-size: clamp(0.72rem, 2.4vw, 0.95rem);
+        letter-spacing: 0.14em;
+        text-transform: uppercase;
+        line-height: 1.4;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        text-align: center;
+        opacity: 0.5;
       }
     </style>
   </head>
@@ -28,87 +116,67 @@
     <app-root></app-root>
 
     <div id="pre-boot-splash">
-      <svg viewBox="0 0 400 420" fill="none" xmlns="http://www.w3.org/2000/svg"
-           style="width:min(88vw,380px);height:auto;filter:drop-shadow(0 8px 32px rgba(180,140,100,0.15))">
-        <rect x="68" y="180" width="10" height="180" rx="5" fill="#c9b89a" opacity="0.55"/>
-        <rect x="322" y="180" width="10" height="180" rx="5" fill="#c9b89a" opacity="0.55"/>
-        <path d="M78 180 Q200 40 322 180" stroke="#c9b89a" stroke-width="9" fill="none" stroke-linecap="round" opacity="0.6"/>
-        <path d="M88 185 Q200 60 312 185" stroke="#e8d5b8" stroke-width="3" fill="none" stroke-linecap="round" opacity="0.5"/>
-        <line x1="120" y1="94" x2="120" y2="120" stroke="#b88fa0" stroke-width="1" opacity="0.7"/>
-        <circle cx="120" cy="125" r="7" fill="#d4a0b0" opacity="0.75"/>
-        <circle cx="113" cy="119" r="5" fill="#e8bcc8" opacity="0.6"/>
-        <circle cx="127" cy="119" r="5" fill="#e8bcc8" opacity="0.6"/>
-        <circle cx="120" cy="112" r="4" fill="#f0d0da" opacity="0.5"/>
-        <line x1="150" y1="72" x2="150" y2="105" stroke="#b88fa0" stroke-width="1" opacity="0.7"/>
-        <circle cx="150" cy="110" r="7" fill="#d4a0b0" opacity="0.75"/>
-        <circle cx="143" cy="104" r="5" fill="#e8bcc8" opacity="0.6"/>
-        <circle cx="157" cy="104" r="5" fill="#e8bcc8" opacity="0.6"/>
-        <line x1="180" y1="58" x2="180" y2="92" stroke="#b88fa0" stroke-width="1" opacity="0.7"/>
-        <circle cx="180" cy="97" r="7" fill="#d4a0b0" opacity="0.75"/>
-        <circle cx="173" cy="91" r="5" fill="#e8bcc8" opacity="0.6"/>
-        <circle cx="187" cy="91" r="5" fill="#e8bcc8" opacity="0.6"/>
-        <line x1="280" y1="94" x2="280" y2="120" stroke="#b88fa0" stroke-width="1" opacity="0.7"/>
-        <circle cx="280" cy="125" r="7" fill="#d4a0b0" opacity="0.75"/>
-        <circle cx="273" cy="119" r="5" fill="#e8bcc8" opacity="0.6"/>
-        <circle cx="287" cy="119" r="5" fill="#e8bcc8" opacity="0.6"/>
-        <circle cx="280" cy="112" r="4" fill="#f0d0da" opacity="0.5"/>
-        <line x1="250" y1="72" x2="250" y2="105" stroke="#b88fa0" stroke-width="1" opacity="0.7"/>
-        <circle cx="250" cy="110" r="7" fill="#d4a0b0" opacity="0.75"/>
-        <circle cx="243" cy="104" r="5" fill="#e8bcc8" opacity="0.6"/>
-        <circle cx="257" cy="104" r="5" fill="#e8bcc8" opacity="0.6"/>
-        <line x1="220" y1="58" x2="220" y2="92" stroke="#b88fa0" stroke-width="1" opacity="0.7"/>
-        <circle cx="220" cy="97" r="7" fill="#d4a0b0" opacity="0.75"/>
-        <circle cx="213" cy="91" r="5" fill="#e8bcc8" opacity="0.6"/>
-        <circle cx="227" cy="91" r="5" fill="#e8bcc8" opacity="0.6"/>
-        <line x1="200" y1="48" x2="200" y2="76" stroke="#b88fa0" stroke-width="1" opacity="0.7"/>
-        <circle cx="200" cy="82" r="9" fill="#d4a0b0" opacity="0.8"/>
-        <circle cx="191" cy="75" r="6" fill="#e8bcc8" opacity="0.65"/>
-        <circle cx="209" cy="75" r="6" fill="#e8bcc8" opacity="0.65"/>
-        <circle cx="200" cy="68" r="5" fill="#f0d0da" opacity="0.55"/>
-        <circle cx="200" cy="82" r="3" fill="#f8e8ee" opacity="0.9"/>
-        <path d="M82 176 Q110 140 148 108" stroke="#7a9e6a" stroke-width="2" fill="none" opacity="0.45"/>
-        <ellipse cx="96"  cy="162" rx="9" ry="5" transform="rotate(-55 96 162)"  fill="#8fb87a" opacity="0.45"/>
-        <ellipse cx="114" cy="148" rx="9" ry="5" transform="rotate(-50 114 148)" fill="#8fb87a" opacity="0.4"/>
-        <ellipse cx="132" cy="130" rx="8" ry="4" transform="rotate(-45 132 130)" fill="#a0c48a" opacity="0.38"/>
-        <path d="M318 176 Q290 140 252 108" stroke="#7a9e6a" stroke-width="2" fill="none" opacity="0.45"/>
-        <ellipse cx="304" cy="162" rx="9" ry="5" transform="rotate(55 304 162)"  fill="#8fb87a" opacity="0.45"/>
-        <ellipse cx="286" cy="148" rx="9" ry="5" transform="rotate(50 286 148)"  fill="#8fb87a" opacity="0.4"/>
-        <ellipse cx="268" cy="130" rx="8" ry="4" transform="rotate(45 268 130)"  fill="#a0c48a" opacity="0.38"/>
-        <rect x="50" y="355" width="300" height="10" rx="5" fill="#c9b89a" opacity="0.35"/>
-        <rect x="30" y="360" width="340" height="6"  rx="3" fill="#d4c4a8" opacity="0.25"/>
-        <rect x="52" y="335" width="26" height="22" rx="4" fill="#b89870" opacity="0.5"/>
-        <rect x="48" y="332" width="34" height="6"  rx="3" fill="#c9a87c" opacity="0.5"/>
-        <path d="M65 332 Q55 310 45 295" stroke="#6a8c5a" stroke-width="2" fill="none" opacity="0.5"/>
-        <ellipse cx="43" cy="292" rx="10" ry="6" transform="rotate(-30 43 292)" fill="#7aaa68" opacity="0.5"/>
-        <path d="M65 332 Q72 308 80 292" stroke="#6a8c5a" stroke-width="2" fill="none" opacity="0.5"/>
-        <ellipse cx="82" cy="290" rx="10" ry="6" transform="rotate(20 82 290)"  fill="#7aaa68" opacity="0.48"/>
-        <path d="M65 332 Q65 310 65 295" stroke="#6a8c5a" stroke-width="2" fill="none" opacity="0.5"/>
-        <ellipse cx="65" cy="292" rx="8"  ry="5" fill="#7aaa68" opacity="0.45"/>
-        <circle cx="43" cy="287" r="5" fill="#e8a0b0" opacity="0.7"/>
-        <circle cx="82" cy="285" r="5" fill="#e8a0b0" opacity="0.7"/>
-        <circle cx="65" cy="288" r="5" fill="#f0b8c0" opacity="0.65"/>
-        <rect x="322" y="335" width="26" height="22" rx="4" fill="#b89870" opacity="0.5"/>
-        <rect x="318" y="332" width="34" height="6"  rx="3" fill="#c9a87c" opacity="0.5"/>
-        <path d="M335 332 Q325 310 315 295" stroke="#6a8c5a" stroke-width="2" fill="none" opacity="0.5"/>
-        <ellipse cx="313" cy="292" rx="10" ry="6" transform="rotate(-20 313 292)" fill="#7aaa68" opacity="0.5"/>
-        <path d="M335 332 Q342 308 350 292" stroke="#6a8c5a" stroke-width="2" fill="none" opacity="0.5"/>
-        <ellipse cx="352" cy="290" rx="10" ry="6" transform="rotate(30 352 290)"  fill="#7aaa68" opacity="0.48"/>
-        <path d="M335 332 Q335 310 335 295" stroke="#6a8c5a" stroke-width="2" fill="none" opacity="0.5"/>
-        <ellipse cx="335" cy="292" rx="8"  ry="5" fill="#7aaa68" opacity="0.45"/>
-        <circle cx="313" cy="287" r="5" fill="#e8a0b0" opacity="0.7"/>
-        <circle cx="352" cy="285" r="5" fill="#e8a0b0" opacity="0.7"/>
-        <circle cx="335" cy="288" r="5" fill="#f0b8c0" opacity="0.65"/>
-        <circle cx="185" cy="265" r="28" stroke="#c9a87c" stroke-width="3" fill="none" opacity="0.85"/>
-        <circle cx="215" cy="265" r="28" stroke="#c9a87c" stroke-width="3" fill="none" opacity="0.85"/>
-        <path d="M200 240 Q215 237 215 265 Q215 293 200 290 Q185 293 185 265 Q185 237 200 240Z" fill="#f5e6cd" opacity="0.3"/>
-        <circle cx="173" cy="253" r="2.5" fill="#f0d090" opacity="0.8"/>
-        <circle cx="227" cy="253" r="2.5" fill="#f0d090" opacity="0.8"/>
-        <ellipse cx="110" cy="300" rx="5" ry="3" transform="rotate(30 110 300)"  fill="#e8bcc8" opacity="0.5"/>
-        <ellipse cx="290" cy="310" rx="5" ry="3" transform="rotate(-20 290 310)" fill="#e8bcc8" opacity="0.5"/>
-        <ellipse cx="160" cy="340" rx="4" ry="2" transform="rotate(50 160 340)"  fill="#f0d0da" opacity="0.45"/>
-        <ellipse cx="240" cy="345" rx="4" ry="2" transform="rotate(-40 240 345)" fill="#f0d0da" opacity="0.45"/>
-        <ellipse cx="200" cy="350" rx="3" ry="2" transform="rotate(10 200 350)"  fill="#e8bcc8" opacity="0.4"/>
-      </svg>
+      <div class="pb-wrap">
+        <svg viewBox="0 0 600 520" fill="none" xmlns="http://www.w3.org/2000/svg"
+             style="width:100%;height:auto;display:block;filter:drop-shadow(0 6px 24px rgba(180,140,100,0.12))">
+          <rect x="68"  y="220" width="14" height="240" rx="7" fill="#c9b89a" opacity="0.55"/>
+          <rect x="518" y="220" width="14" height="240" rx="7" fill="#c9b89a" opacity="0.55"/>
+          <rect x="60"  y="214" width="30" height="12" rx="6" fill="#d4c4a8" opacity="0.6"/>
+          <rect x="510" y="214" width="30" height="12" rx="6" fill="#d4c4a8" opacity="0.6"/>
+          <path d="M82 222 Q300 30 518 222" stroke="#c9b89a" stroke-width="11" fill="none" stroke-linecap="round" opacity="0.6"/>
+          <path d="M96 228 Q300 52 504 228" stroke="#e8d5b8" stroke-width="4"  fill="none" stroke-linecap="round" opacity="0.45"/>
+          <path d="M72 218 Q300 14 528 218" stroke="#d4c4a8" stroke-width="3"  fill="none" stroke-linecap="round" opacity="0.3"/>
+          <line x1="148" y1="110" x2="148" y2="148" stroke="#b88fa0" stroke-width="1.2" opacity="0.7"/>
+          <circle cx="148" cy="155" r="9" fill="#d4a0b0" opacity="0.75"/>
+          <circle cx="139" cy="147" r="6" fill="#e8bcc8" opacity="0.6"/>
+          <circle cx="157" cy="147" r="6" fill="#e8bcc8" opacity="0.6"/>
+          <line x1="190" y1="78"  x2="190" y2="118" stroke="#b88fa0" stroke-width="1.2" opacity="0.7"/>
+          <circle cx="190" cy="125" r="9" fill="#d4a0b0" opacity="0.75"/>
+          <circle cx="181" cy="117" r="6" fill="#e8bcc8" opacity="0.6"/>
+          <circle cx="199" cy="117" r="6" fill="#e8bcc8" opacity="0.6"/>
+          <line x1="238" y1="54"  x2="238" y2="96"  stroke="#b88fa0" stroke-width="1.2" opacity="0.7"/>
+          <circle cx="238" cy="103" r="9" fill="#d4a0b0" opacity="0.75"/>
+          <circle cx="229" cy="95"  r="6" fill="#e8bcc8" opacity="0.6"/>
+          <circle cx="247" cy="95"  r="6" fill="#e8bcc8" opacity="0.6"/>
+          <line x1="300" y1="36"  x2="300" y2="80"  stroke="#b88fa0" stroke-width="1.4" opacity="0.75"/>
+          <circle cx="300" cy="88"  r="12" fill="#d4a0b0" opacity="0.85"/>
+          <circle cx="288" cy="79"  r="8"  fill="#e8bcc8" opacity="0.7"/>
+          <circle cx="312" cy="79"  r="8"  fill="#e8bcc8" opacity="0.7"/>
+          <circle cx="300" cy="68"  r="6"  fill="#f0d0da" opacity="0.6"/>
+          <circle cx="300" cy="88"  r="4"  fill="#fff0f4" opacity="0.9"/>
+          <line x1="362" y1="54"  x2="362" y2="96"  stroke="#b88fa0" stroke-width="1.2" opacity="0.7"/>
+          <circle cx="362" cy="103" r="9" fill="#d4a0b0" opacity="0.75"/>
+          <circle cx="353" cy="95"  r="6" fill="#e8bcc8" opacity="0.6"/>
+          <circle cx="371" cy="95"  r="6" fill="#e8bcc8" opacity="0.6"/>
+          <line x1="410" y1="78"  x2="410" y2="118" stroke="#b88fa0" stroke-width="1.2" opacity="0.7"/>
+          <circle cx="410" cy="125" r="9" fill="#d4a0b0" opacity="0.75"/>
+          <circle cx="401" cy="117" r="6" fill="#e8bcc8" opacity="0.6"/>
+          <circle cx="419" cy="117" r="6" fill="#e8bcc8" opacity="0.6"/>
+          <line x1="452" y1="110" x2="452" y2="148" stroke="#b88fa0" stroke-width="1.2" opacity="0.7"/>
+          <circle cx="452" cy="155" r="9" fill="#d4a0b0" opacity="0.75"/>
+          <circle cx="443" cy="147" r="6" fill="#e8bcc8" opacity="0.6"/>
+          <circle cx="461" cy="147" r="6" fill="#e8bcc8" opacity="0.6"/>
+          <rect x="40"  y="456" width="520" height="14" rx="7" fill="#c9b89a" opacity="0.35"/>
+          <rect x="44"  y="428" width="34" height="28" rx="5" fill="#b89870" opacity="0.5"/>
+          <rect x="38"  y="422" width="46" height="10" rx="5" fill="#c9a87c" opacity="0.5"/>
+          <circle cx="32" cy="367" r="7" fill="#e8a0b0" opacity="0.75"/>
+          <circle cx="84" cy="365" r="7" fill="#e8a0b0" opacity="0.75"/>
+          <rect x="522" y="428" width="34" height="28" rx="5" fill="#b89870" opacity="0.5"/>
+          <rect x="516" y="422" width="46" height="10" rx="5" fill="#c9a87c" opacity="0.5"/>
+          <circle cx="510" cy="367" r="7" fill="#e8a0b0" opacity="0.75"/>
+          <circle cx="562" cy="365" r="7" fill="#e8a0b0" opacity="0.75"/>
+        </svg>
+        <div class="pb-mandap-text">
+          <div class="pb-monogram">
+            <span class="pb-letter">A</span>
+            <span class="pb-amp">&amp;</span>
+            <span class="pb-letter">A</span>
+          </div>
+          <div class="pb-rule"></div>
+          <p class="pb-names">Anusree &amp; Akhil</p>
+        </div>
+      </div>
+      <div class="pb-btn">Open<br>Invitation</div>
     </div>
   </body>
 </html>

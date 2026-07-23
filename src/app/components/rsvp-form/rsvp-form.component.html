@@ -4,6 +4,9 @@
     <div appReveal [revealDelay]="50" class="section-accent"></div>
     <p appReveal [revealDelay]="100" class="section-subheading">
       {{ wedding.rsvp.sectionSubtitle }}
+      <span class="ml-1 inline-block text-[1.1em] font-semibold tracking-wide text-charcoal">
+        {{ wedding.rsvp.sectionSubtitleDate }}
+      </span>{{ wedding.rsvp.sectionSubtitleEnd }}
     </p>
   </div>
 
@@ -189,39 +192,7 @@
               ></span>
             </button>
           </div>
-
-          <div>
-            <label
-              for="dietary"
-              class="mb-2 block text-xs font-medium tracking-widest uppercase text-sage-600"
-            >
-              {{ wedding.rsvp.dietaryLabel }}
-            </label>
-            <input
-              id="dietary"
-              type="text"
-              formControlName="dietaryRestrictions"
-              [placeholder]="wedding.rsvp.dietaryPlaceholder"
-              class="w-full rounded-xl border border-cream-200 bg-cream-50/80 px-4 py-3 text-charcoal transition-colors placeholder:text-charcoal-light/40 focus:border-blush-300 focus:outline-none focus:ring-2 focus:ring-blush-200"
-            />
-          </div>
         }
-
-        <!-- <div>
-          <label
-            for="dietary"
-            class="mb-2 block text-xs font-medium tracking-widest uppercase text-sage-600"
-          >
-            {{ wedding.rsvp.dietaryLabel }}
-          </label>
-          <input
-            id="dietary"
-            type="text"
-            formControlName="dietaryRestrictions"
-            [placeholder]="wedding.rsvp.dietaryPlaceholder"
-            class="w-full rounded-xl border border-cream-200 bg-cream-50/80 px-4 py-3 text-charcoal transition-colors placeholder:text-charcoal-light/40 focus:border-blush-300 focus:outline-none focus:ring-2 focus:ring-blush-200"
-          />
-        </div> -->
 
         <div>
           <label

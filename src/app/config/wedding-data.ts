@@ -92,7 +92,7 @@ export const WEDDING_DATA: WeddingData = {
         id: 'reception',
         title: 'Reception',
         date: 'Sunday, August 23, 2026',
-        time: '6:00 PM',
+        time: '6:30 PM',
         venue: 'Ranganath Auditorium',
         address: 'Vazhikulangara, North Paravur, Ernakulam, Kerala',
         description:
@@ -107,7 +107,7 @@ export const WEDDING_DATA: WeddingData = {
     title: 'Gallery',
     subtitle: 'Moments from our journey together.',
     images: [
-      {
+      /*{
         id: 'g1',
         src: 'gallery/engagement-1.png',
         alt: 'Couple sharing a quiet moment together',
@@ -131,14 +131,35 @@ export const WEDDING_DATA: WeddingData = {
         id: 'g5',
         src: 'gallery/engagement-5.png',
         alt: 'Couple holding hands showing engagement rings and bangles',
+      },*/
+      {
+        id: 'g6',
+        src: 'gallery/engagement-6.png',
+        alt: 'Couple standing together under a green floral arch',
+      },
+      {
+        id: 'g7',
+        src: 'gallery/engagement-7.png',
+        alt: 'Couple walking together in a garden pathway',
+      },
+      {
+        id: 'g8',
+        src: 'gallery/engagement-8.png',
+        alt: 'Bride laughing joyfully in a garden with greenery',
+      },
+      {
+        id: 'g9',
+        src: 'gallery/engagement-9.png',
+        alt: 'Couple sharing a close romantic moment by an archway',
       },
     ],
   },
 
   rsvp: {
     sectionTitle: 'RSVP',
-    sectionSubtitle:
-      'Please let us know if you can join us by August 23, 2026. We hope to see you there!',
+    sectionSubtitle: 'Please let us know if you can join us by',
+    sectionSubtitleDate: 'August 23, 2026',
+    sectionSubtitleEnd: '. We hope to see you there!',
     nameLabel: 'Your Name',
     namePlaceholder: 'Full name or family name',
     attendanceLabel: 'Will you be attending?',
@@ -162,6 +183,6 @@ export const WEDDING_DATA: WeddingData = {
 
   footer: {
     message: 'With love and gratitude',
-    hashtag: '#AnusreeeAndAkhil2026',
+    hashtag: '#AnusreeAndAkhil2026',
   },
 };

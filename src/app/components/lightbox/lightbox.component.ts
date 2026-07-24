@@ -1,4 +1,4 @@
-import { Component, HostListener, Input, signal } from '@angular/core';
+import { Component, HostListener, Input, Output, EventEmitter, signal } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { GalleryImage } from '../../models/wedding.model';
 
@@ -10,12 +10,18 @@ import { GalleryImage } from '../../models/wedding.model';
 })
 export class LightboxComponent {
   @Input() images: GalleryImage[] = [];
+  @Output() closed = new EventEmitter<void>();
 
   readonly isOpen = signal(false);
   readonly currentIndex = signal(0);
 
   get currentImage(): GalleryImage | null {
     return this.images[this.currentIndex()] ?? null;
+  }
+
+  imageSrc(image: GalleryImage): string {
+    const src = image.src;
+    return src.startsWith('/') || /^https?:\/\//i.test(src) ? src : `/${src}`;
   }
 
   open(index: number): void {
@@ -25,8 +31,10 @@ export class LightboxComponent {
   }
 
   close(): void {
+    if (!this.isOpen()) return;
     this.isOpen.set(false);
     document.body.style.overflow = '';
+    this.closed.emit();
   }
 
   next(): void {

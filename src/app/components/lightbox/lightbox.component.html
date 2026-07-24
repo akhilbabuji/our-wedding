@@ -59,7 +59,7 @@
       (click)="$event.stopPropagation()"
     >
       <img
-        [src]="currentImage.src"
+        [src]="imageSrc(currentImage)"
         [alt]="currentImage.alt"
         class="max-h-[80vh] w-full rounded-lg object-contain shadow-2xl"
       />

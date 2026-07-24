@@ -45,6 +45,8 @@ export interface WeddingEvent {
 export interface GalleryImage {
   id: string;
   src: string;
+  /** Original / high-resolution file used for downloads (falls back to src). */
+  hdSrc?: string;
   alt: string;
   caption?: string;
 }
